@@ -1,0 +1,44 @@
+name: "Market Analysis: Primary Care Pomona"
+output_dir: "docs"
+navbar:
+  title: "Market Analysis: Pomona"
+  left:
+    - text: "Home"
+      href: index.html
+
+    - text: "PCP Review"
+      icon: fa-address-card
+      menu:
+      - text: "Patient Review"
+        href: Patient_Review.html
+      - text: "Payor Mix"
+        href: PayorMix.html
+      - text: "Referrals From"
+        href: Referrals.html
+
+    - text: "Proposed Location"
+      icon: fa-lightbulb
+      menu:
+      - text: "Potential Patients"
+        # href: county_review.html
+      - text: "---------"  
+      - text: "Financial Class"
+        # href: fin_class.html
+      - text: "---------"  
+      - text: "W GSO"
+        
+
+
+  right:
+    - text: "Contact"
+      icon: glyphicon-question-sign
+      href: contact.html        
+output:
+  html_document:
+    theme: spacelab
+    df_print: paged
+    highlight: textmate
+    includes:
+      in_header: header.html
+      after_body: footer.html
+    css: styles.css
