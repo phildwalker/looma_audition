@@ -1,7 +1,7 @@
 name: "Looma Audition: Trends"
 output_dir: "docs"
 navbar:
-  title: "Loop™ Impact"
+  title: "Loop™ Impact Analysis"
   left:
     - text: "Analysis"
       icon: fa-lock-open
