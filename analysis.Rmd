@@ -18,3 +18,15 @@ Imagine we ran an experiment to test the impact a Loop™ campaign has on sales.
 
 
 Assume you need to provide an analysis of this experiment under time constraints (in reality, we expect you to devote 2-4 hours to this audition project).
+
+# Executive Summary
+
+__Goal:__  
+We want to know the impact the Loop™ campaign had on sales.
+
+__Results:__
+
+# Summary of Impact
+
+
+# Digging into Results

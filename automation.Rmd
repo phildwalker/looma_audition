@@ -19,3 +19,9 @@ what if the data came in a consistent manner and we just wanted to run the analy
 
 
 
+* make files
+* windows scheduler / cron jobs
+  * emails/ alerts when completed to have a "human in the loop" development cycle
+* git actions
+
+

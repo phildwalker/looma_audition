@@ -14,10 +14,10 @@ navbar:
       href: automation.html
 
 
-  right:
-    - text: "Contact"
-      icon: glyphicon-question-sign
-      href: contact.html        
+  # right:
+  #   - text: "Contact"
+  #     icon: glyphicon-question-sign
+  #     href: contact.html        
 output:
   html_document:
     theme: spacelab

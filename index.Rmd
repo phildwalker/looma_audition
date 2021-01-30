@@ -1,18 +1,25 @@
 ---
-title: "Sample Welcome page"
+title: "Welcome"
 # output: html_notebook
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+This is the welcome page to this analysis, so welcome!
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+For this body of work, we have captured both the development cycle and deployment of the results within the same r workflow, using an rproject + rmarkdown files to organize my work and then 
 
-```{r}
-plot(cars)
-```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+There are 3 sections:  
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+1. The Analysis
+  * I envision this section to be what could be shared with either an internal or external customer. 
+1. The Methodology    
+  * In here I will show what I did to get to the 
+1. Automation Considersations  
+  * In here I will talk about both what I have done in prior roles to automate my work and what I see as considersations when determining what to do next.
+
+
+Notes:
+
+* This site is currently hosted for free using the netlify app. [https://looma-audition.netlify.app/]. It is currently connected to the repo which houses the site as well as the analysis steps [https://github.com/phildwalker/looma_audition]
+* I am very grateful for both the abundance of resouces online to help provide the documentation to quickly get this site deployed via netlify, but also for my current coworkers at Cone Health who have helped me to grow in my R knowledge as well as helping to show me how to integrate the css/html portions to take the results to another level.
