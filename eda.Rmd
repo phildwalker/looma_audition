@@ -1,6 +1,13 @@
 ---
 title: "Methodology"
-# output: html_notebook
+date: "`r paste0('Last Updated: ', format(Sys.time(), '%d %B, %Y')) `"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+editor_options: 
+  chunk_output_type: console
 ---
 
 This is how the analysis was performed...  
@@ -11,10 +18,15 @@ This is how the analysis was performed...
 
 Code will be visible here (probably show/hide code chunks)
 
-```{r, include=F, echo=T}
-library(tidyverse)
-```
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = T, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(fig.align = 'center')
 
+library(tidyverse)
+
+# To Turn off Scientific Notation Use this.
+options(scipen = 999)
+```
 
 
 # Read In Data

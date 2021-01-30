@@ -1,6 +1,13 @@
 ---
 title: "Automation Considersations"
-# output: html_notebook
+date: "`r paste0('Last Updated: ', format(Sys.time(), '%d %B, %Y')) `"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+editor_options: 
+  chunk_output_type: console
 ---
 
 This is where we talk about how we would automate a process like this...

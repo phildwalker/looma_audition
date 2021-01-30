@@ -1,11 +1,24 @@
 ---
 title: "Analysis Results"
+date: "`r paste0('Last Updated: ', format(Sys.time(), '%d %B, %Y')) `"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+editor_options: 
+  chunk_output_type: console
 ---
 
-This is the actual analysis output section... formatted in an clean easy to digest report
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(fig.align = 'center')
 
+library(tidyverse)
 
-code will not be visible here
+# To Turn off Scientific Notation Use this.
+options(scipen = 999)
+```
 
 
 # Prompt
