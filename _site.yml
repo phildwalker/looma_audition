@@ -27,3 +27,5 @@ output:
       in_header: header.html
       after_body: footer.html
     css: styles.css
+    
+# favicon: favicon.ico
