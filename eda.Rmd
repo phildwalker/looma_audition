@@ -1,0 +1,51 @@
+---
+title: "Methodology"
+# output: html_notebook
+---
+
+This is how the analysis was performed...  
+
+* ingesting the dataset  
+* exploring the results  
+* developing the cleaned views  
+
+Code will be visible here (probably show/hide code chunks)
+
+```{r, include=F, echo=T}
+library(tidyverse)
+```
+
+
+
+# Read In Data
+
+
+## Check for missingness...
+
+# Review of Dataset
+
+## Their Notes
+
+The csv file provided contains sample data for analysis. We receive raw data at the transaction level, with one row per customer and item purchased, with timestamps. The sample data is an aggregate of this at the “promotional period” level. Each campaign runs for one promotional period at a time. These periods vary between 3 and 5 weeks in length, so we provide sales in this data as “weekly velocity”, meaning average sales per week during each period.
+
+Specifically, the dataset contains these columns:  
+
+- store_group : which of the three experimental conditions the store falls in  
+- store_id : ID unique to a physical store   
+- promo_period_int : unique promo period number ordered in time (this doesn’t provide information you can’t get from period_num and period_year, but it’s convenient)    
+- period_num : number of the promo period (there are 13 every year)  
+- period_year: year the period falls in (along with period_num, unique identifies the promo period)  
+- weekly_velocity_amount : average weekly dollar sales  
+- weekly_velocity_quantity : average weekly unit sales  
+
+
+The data provided is all for one featured product from Brewery A. The experiment was run during period number 11 of 2020. Data is provided back to mid-2018, but don’t feel compelled to incorporate it all in your analysis. What data is most relevant is up to you.
+
+## What do we see
+
+
+
+
+
+
+

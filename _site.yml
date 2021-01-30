@@ -1,32 +1,17 @@
-name: "Market Analysis: Primary Care Pomona"
+name: "Looma Audition: Trends"
 output_dir: "docs"
 navbar:
-  title: "Market Analysis: Pomona"
+  title: "Looma Audition: Trends"
   left:
-    - text: "Home"
-      href: index.html
-
-    - text: "PCP Review"
-      icon: fa-address-card
-      menu:
-      - text: "Patient Review"
-        href: Patient_Review.html
-      - text: "Payor Mix"
-        href: PayorMix.html
-      - text: "Referrals From"
-        href: Referrals.html
-
-    - text: "Proposed Location"
+    - text: "Analysis"
+      icon: fa-lock-open
+      href: analysis.html
+    - text: "Methodology"
       icon: fa-lightbulb
-      menu:
-      - text: "Potential Patients"
-        # href: county_review.html
-      - text: "---------"  
-      - text: "Financial Class"
-        # href: fin_class.html
-      - text: "---------"  
-      - text: "W GSO"
-        
+      href: eda.html
+    - text: "Automation Considerations"  
+      icon: fa-seedling
+      href: automation.html
 
 
   right:

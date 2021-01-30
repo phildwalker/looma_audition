@@ -1,0 +1,20 @@
+---
+title: "Analysis Results"
+---
+
+This is the actual analysis output section... formatted in an clean easy to digest report
+
+
+code will not be visible here
+
+
+# Prompt
+
+Imagine we ran an experiment to test the impact a Loop™ campaign has on sales. The experiment involved 42 stores in 3 groups:  
+
+* “Program test”: These stores had the full Loop™ campaign as it would normally run, with a display of featured products and a tablet showing 2-3 films in a looping playlist  
+* “Film control” These stores had the full program but with the film from one brand (“Brewery A”) left out.   
+* “Baseline control” These stores did not have Loop™ campaigns or featured products on display.  
+
+
+Assume you need to provide an analysis of this experiment under time constraints (in reality, we expect you to devote 2-4 hours to this audition project).

@@ -1,0 +1,21 @@
+---
+title: "Automation Considersations"
+# output: html_notebook
+---
+
+This is where we talk about how we would automate a process like this...
+
+presenting a few different considerations..
+
+what if we are working on personal windows machines?
+
+what if we are working on a centralized linux server?
+
+what if the data come in batches?
+
+what if the data needs to be cleaned/ validated before we would push it out?
+
+what if the data came in a consistent manner and we just wanted to run the analysis so it was "ready in the morning"
+
+
+
