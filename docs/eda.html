@@ -35,11 +35,11 @@
 
 <style>
 #TOC {
-  background: url("https://theloomaproject.com/wp-content/uploads/2018/11/Looma_Logo_White.png");
-  background-size: 95%;
-  padding-top: 80px !important;
+  background: url("https://theloomaproject.com/wp-content/uploads/2019/01/looma-logo-dark.png");
+  background-size: 45%;
+  padding-top:50px !important;
   background-repeat: no-repeat;
-  background-position: 50% 15px;
+  background-position: 50% 5px;
 }
 
 </style>
@@ -450,6 +450,7 @@ div.tocify {
 <p>Code will be visible here (probably show/hide code chunks)</p>
 <div id="read-in-data" class="section level1">
 <h1>Read In Data</h1>
+<pre class="r"><code>dat &lt;- read_csv(here::here(&quot;data-raw&quot;, &quot;looma_audition_data.csv&quot;))</code></pre>
 <div id="check-for-missingness" class="section level2">
 <h2>Check for missingness…</h2>
 </div>
@@ -532,7 +533,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 

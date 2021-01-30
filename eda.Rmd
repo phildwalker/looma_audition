@@ -5,7 +5,7 @@ output:
   html_document:
     toc: true
     toc_float: true
-    code_folding: hide
+    code_folding: show
 editor_options: 
   chunk_output_type: console
 ---
@@ -30,6 +30,10 @@ options(scipen = 999)
 
 
 # Read In Data
+
+```{r}
+dat <- read_csv(here::here("data-raw", "looma_audition_data.csv"))
+```
 
 
 ## Check for missingness...
