@@ -11,15 +11,15 @@ For this body of work, we have captured both the development cycle and deploymen
 
 There are 3 sections:  
 
-1. The Analysis
+__1. The Analysis__
   * I envision this section to be what could be shared with either an internal or external customer. 
-1. The Methodology    
+__1. The Methodology__    
   * In here I will show what I did to get to the 
-1. Automation Considersations  
-  * In here I will talk about both what I have done in prior roles to automate my work and what I see as considersations when determining what to do next.
+__1. Automation Considerations__  
+  * In here I will talk about both what I have done in prior roles to automate my work and what I see as considerations when determining what to do next.
 
 
 Notes:
 
 * This site is currently hosted for free using the netlify app. [https://looma-audition.netlify.app/]. It is currently connected to the repo which houses the site as well as the analysis steps [https://github.com/phildwalker/looma_audition]
-* I am very grateful for both the abundance of resouces online to help provide the documentation to quickly get this site deployed via netlify, but also for my current coworkers at Cone Health who have helped me to grow in my R knowledge as well as helping to show me how to integrate the css/html portions to take the results to another level.
+* I am very grateful for both the abundance of resources online to help provide the documentation to quickly get this site deployed via netlify, but also for my current coworkers at Cone Health who have helped me to grow in my R knowledge as well as helping to show me how to integrate the css/html portions to take the results to another level.
