@@ -29,7 +29,12 @@ library(gt)
 library(infer)
 # To Turn off Scientific Notation Use this.
 options(scipen = 999)
-theme_set(theme_minimal())
+
+source("./src/looma_theme.R")
+
+# theme_set(theme_minimal())
+
+
 
 ```
 
@@ -67,6 +72,8 @@ glimpse(dat)
 
 ## Check for missingness
 
+Reviewing the chart below we see that we do not have any concerns about variables with missing data, therefore we will not have to take into consideration ways to mitigate/ adjust for missing data.
+
 ```{r}
 naniar::vis_miss(dat)
 ```
@@ -84,7 +91,8 @@ reviewCol <-
                geom_bar()+
                scale_fill_pdw()+
                labs(title = glue::glue("Distribution for variable: {.x}"))+
-               theme(plot.title = element_text(size = 15))
+               looma_theme()
+               # theme(plot.title = element_text(size = 15))
 )
 
 # reviewCol[[2]] #this is "iter 1"
@@ -108,7 +116,11 @@ dat %>%
   ggplot(aes(store_group, weekly_velocity_amount, fill = store_group, color = store_group))+
     geom_jitter(size = 0.5, width = .3)+
     geom_violin(alpha=0.7)+
-    geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)
+    geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)+
+    labs(title = "Comparison of Weekly Velocity Amount by Store Group")+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    looma_theme()
 
 
 summary %>% 
@@ -166,7 +178,11 @@ dat %>%
   ggplot(aes(store_group, weekly_velocity_quantity, fill = store_group, color = store_group))+
     geom_jitter(size = 0.5, width = .3)+
     geom_violin(alpha=0.7)+
-    geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)
+    geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)+
+    labs(title = "Comparison of Weekly Velocity Quantity by Store Group")+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    looma_theme()
 
 
 summary %>% 
