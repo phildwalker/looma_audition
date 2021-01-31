@@ -26,6 +26,7 @@ library(tidyverse)
 library(patchwork)
 library(pdwtheme)
 library(gt)
+library(infer)
 # To Turn off Scientific Notation Use this.
 options(scipen = 999)
 theme_set(theme_minimal())
@@ -91,7 +92,9 @@ reviewCol
 
 ```
 
-## Correlations
+## Avg Velocity Amount
+
+This summary would seem to indicate that the mean of the weekly velocity amount (average weekly dollars in sales) were higher for s
 
 ```{r}
 
@@ -114,9 +117,123 @@ summary %>%
 
 ```
 
+Using an anova to see if the differences are statistically significant. We would conclude that one or more of the group's weekly velocity amounts are statisically different
+
+```{r}
+
+observed_f_statistic <-dat %>%
+  specify(weekly_velocity_amount ~ store_group) %>%
+  calculate(stat = "F")
 
 
-# Investigatings Effect
+# visualize the theoretical null distribution and test statistic
+dat %>%
+  specify(weekly_velocity_amount ~ store_group) %>%
+  hypothesize(null = "independence") %>%
+  visualize(method = "theoretical") + 
+  shade_p_value(observed_f_statistic,
+                direction = "greater")
+
+# generate the null distribution using randomization
+null_distribution <- dat %>%
+  specify(weekly_velocity_amount ~ store_group) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "F")
+
+# calculate the p value from the observed statistic and null distribution
+p_value <- null_distribution %>%
+  get_p_value(obs_stat = observed_f_statistic,
+              direction = "greater")
+
+p_value
+
+```
+
+## Avg Velocity Quantity
+
+This summary would seem to indicate that the mean of the weekly velocity amount (average weekly dollars in sales) were higher for s
+
+```{r}
+
+summary <- dat %>% 
+  group_by(store_group) %>% 
+  summarise(avg_amnt = mean(weekly_velocity_quantity),
+            n = n(),
+            std_amnt = sd(weekly_velocity_quantity))
+
+dat %>% 
+  ggplot(aes(store_group, weekly_velocity_quantity, fill = store_group, color = store_group))+
+    geom_jitter(size = 0.5, width = .3)+
+    geom_violin(alpha=0.7)+
+    geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)
+
+
+summary %>% 
+  gt() %>% 
+  fmt_number(columns = c(2,4), decimals = 2)
+
+```
+
+Using an anova to see if the differences are statistically significant.
+
+```{r}
+
+observed_f_statistic <-dat %>%
+  specify(weekly_velocity_quantity ~ store_group) %>%
+  calculate(stat = "F")
+
+
+# visualize the theoretical null distribution and test statistic
+dat %>%
+  specify(weekly_velocity_quantity ~ store_group) %>%
+  hypothesize(null = "independence") %>%
+  visualize(method = "theoretical") + 
+  shade_p_value(observed_f_statistic,
+                direction = "greater")
+
+# generate the null distribution using randomization
+null_distribution <- dat %>%
+  specify(weekly_velocity_quantity ~ store_group) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate(stat = "F")
+
+# calculate the p value from the observed statistic and null distribution
+p_value <- null_distribution %>%
+  get_p_value(obs_stat = observed_f_statistic,
+              direction = "greater")
+
+p_value
+
+```
+
+
+
+# Trends over time {.tabset .tabset-pills}
+
+```{r}
+dat <-
+  dat %>% 
+  mutate(period_yr_num = as.numeric(paste0(as.character(period_year), ".", as.character(period_num))))
+```
+
+
+# Are stores represented evenly across the time period?
+
+```{r}
+
+dat %>% 
+  count(store_id, store_group, period_year) %>% 
+  pivot_wider(names_from= period_year, values_from = n) %>% 
+  DT::datatable(rownames = F, filter = c("top"))
+
+
+```
+
+
+
+# Investigatings Effect {.tabset .tabset-pills}
 
 
 ## Is there an overall improvement?

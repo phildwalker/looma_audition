@@ -7,4 +7,4 @@ publish:
 	RSCRIPT -e 'fs::dir_copy("docs", new_path = "docs", overwrite = T)'
 	
 commit:
-	git add .; git commit -m "update via make, orange if hover"; git push origin main;
+	git add .; git commit -m "update via make"; git push origin main;

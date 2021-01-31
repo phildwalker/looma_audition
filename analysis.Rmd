@@ -21,23 +21,33 @@ options(scipen = 999)
 ```
 
 
-# Prompt
+# Executive Summary
+
+__Prompt__
 
 Imagine we ran an experiment to test the impact a Loop™ campaign has on sales. The experiment involved 42 stores in 3 groups:  
 
-* “Program test”: These stores had the full Loop™ campaign as it would normally run, with a display of featured products and a tablet showing 2-3 films in a looping playlist  
-* “Film control” These stores had the full program but with the film from one brand (“Brewery A”) left out.   
-* “Baseline control” These stores did not have Loop™ campaigns or featured products on display.  
-
+* _“Program test”_ These stores had the full Loop™ campaign as it would normally run, with a display of featured products and a tablet showing 2-3 films in a looping playlist  
+* _“Film control”_ These stores had the full program but with the film from one brand (“Brewery A”) left out.   
+* _“Baseline control”_ These stores did not have Loop™ campaigns or featured products on display.  
 
 Assume you need to provide an analysis of this experiment under time constraints (in reality, we expect you to devote 2-4 hours to this audition project).
 
-# Executive Summary
-
 __Goal:__  
-We want to know the impact the Loop™ campaign had on sales.
+We want to know the impact the Loop™ campaign had on sales. By comparing the different groups we would like to learn a few different things:  
 
+* Does the Loop campaign affect store sales (Program Test & Film Control vs Baseline)  
+* What is the impact of the film of Brewery A on sales
+ 
+ 
 __Results:__
+From the analysis we find that:
+
+1. The program test and film control both show an increase in to sales velocity.
+
+
+chi-square test for statistical difference? 
+
 
 # Summary of Impact
 
