@@ -23,22 +23,23 @@ knitr::opts_chunk$set(echo = T, message = FALSE, warning = FALSE)
 knitr::opts_chunk$set(fig.align = 'center')
 
 library(tidyverse)
-
+library(patchwork)
+library(pdwtheme)
+library(gt)
 # To Turn off Scientific Notation Use this.
 options(scipen = 999)
+theme_set(theme_minimal())
+
 ```
 
 
-# Read In Data
+# Read In Data {.tabset .tabset-pills}
 
 ```{r}
 dat <- read_csv(here::here("data-raw", "looma_audition_data.csv"))
+
+colnames <- colnames(dat)
 ```
-
-
-## Check for missingness...
-
-# Review of Dataset
 
 ## Their Notes
 
@@ -56,6 +57,61 @@ Specifically, the dataset contains these columns:
 
 
 The data provided is all for one featured product from Brewery A. The experiment was run during period number 11 of 2020. Data is provided back to mid-2018, but don’t feel compelled to incorporate it all in your analysis. What data is most relevant is up to you.
+
+## Summary of Data
+
+```{r}
+glimpse(dat)
+```
+
+## Check for missingness
+
+```{r}
+naniar::vis_miss(dat)
+```
+
+## Distributions of Data
+
+```{r}
+
+reviewCol <- 
+  purrr::map(colnames,
+             ~ dat %>% ggplot(aes_string(.x, fill="store_group"))+
+               geom_bar()+
+               scale_fill_pdw()+
+               labs(title = glue::glue("Distribution for variable: {.x}"))+
+               theme(plot.title = element_text(size = 15))
+)
+
+# reviewCol[[2]] #this is "iter 1"
+reviewCol
+
+```
+
+## Correlations
+
+```{r}
+
+summary <- dat %>% 
+  group_by(store_group) %>% 
+  summarise(avg_amnt = mean(weekly_velocity_amount),
+            n = n(),
+            std_amnt = sd(weekly_velocity_amount))
+
+dat %>% 
+  ggplot(aes(store_group, weekly_velocity_amount, fill = store_group, color = store_group))+
+    geom_jitter(size = 0.5, width = .3)+
+    geom_violin(alpha=0.7)+
+    geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)
+
+
+summary %>% 
+  gt() %>% 
+  fmt_number(columns = c(2,4), decimals = 2)
+
+```
+
+
 
 ## What do we see
 

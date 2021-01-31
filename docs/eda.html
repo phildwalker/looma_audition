@@ -434,7 +434,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Methodology</h1>
-<h4 class="date">Last Updated: 29 January, 2021</h4>
+<h4 class="date">Last Updated: 30 January, 2021</h4>
 
 </div>
 
@@ -448,15 +448,11 @@ div.tocify {
 <li>developing the cleaned views</li>
 </ul>
 <p>Code will be visible here (probably show/hide code chunks)</p>
-<div id="read-in-data" class="section level1">
-<h1>Read In Data</h1>
-<pre class="r"><code>dat &lt;- read_csv(here::here(&quot;data-raw&quot;, &quot;looma_audition_data.csv&quot;))</code></pre>
-<div id="check-for-missingness" class="section level2">
-<h2>Check for missingness…</h2>
-</div>
-</div>
-<div id="review-of-dataset" class="section level1">
-<h1>Review of Dataset</h1>
+<div id="read-in-data" class="section level1 tabset tabset-pills">
+<h1 class="tabset tabset-pills">Read In Data</h1>
+<pre class="r"><code>dat &lt;- read_csv(here::here(&quot;data-raw&quot;, &quot;looma_audition_data.csv&quot;))
+
+colnames &lt;- colnames(dat)</code></pre>
 <div id="their-notes" class="section level2">
 <h2>Their Notes</h2>
 <p>The csv file provided contains sample data for analysis. We receive raw data at the transaction level, with one row per customer and item purchased, with timestamps. The sample data is an aggregate of this at the “promotional period” level. Each campaign runs for one promotional period at a time. These periods vary between 3 and 5 weeks in length, so we provide sales in this data as “weekly velocity”, meaning average sales per week during each period.</p>
@@ -477,6 +473,445 @@ div.tocify {
 <li>weekly_velocity_quantity : average weekly unit sales</li>
 </ul>
 <p>The data provided is all for one featured product from Brewery A. The experiment was run during period number 11 of 2020. Data is provided back to mid-2018, but don’t feel compelled to incorporate it all in your analysis. What data is most relevant is up to you.</p>
+</div>
+<div id="summary-of-data" class="section level2">
+<h2>Summary of Data</h2>
+<pre class="r"><code>glimpse(dat)</code></pre>
+<pre><code>## Rows: 1,219
+## Columns: 7
+## $ store_group              &lt;chr&gt; &quot;baseline_control&quot;, &quot;baseline_control&quot;, &quot;b...
+## $ store_id                 &lt;dbl&gt; 1, 2, 3, 3, 4, 5, 1, 4, 6, 3, 7, 4, 4, 8, ...
+## $ promo_period_int         &lt;dbl&gt; 46, 46, 50, 62, 63, 64, 65, 66, 68, 68, 69...
+## $ period_num               &lt;dbl&gt; 7, 7, 11, 10, 11, 12, 13, 1, 3, 3, 4, 5, 7...
+## $ period_year              &lt;dbl&gt; 2018, 2018, 2018, 2019, 2019, 2019, 2019, ...
+## $ weekly_velocity_amount   &lt;dbl&gt; 98.68, 120.43, 114.68, 181.65, 112.44, 89....
+## $ weekly_velocity_quantity &lt;dbl&gt; 6.75, 7.25, 6.75, 10.25, 6.25, 6.00, 6.75,...</code></pre>
+</div>
+<div id="check-for-missingness" class="section level2">
+<h2>Check for missingness</h2>
+<pre class="r"><code>naniar::vis_miss(dat)</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="distributions-of-data" class="section level2">
+<h2>Distributions of Data</h2>
+<pre class="r"><code>reviewCol &lt;- 
+  purrr::map(colnames,
+             ~ dat %&gt;% ggplot(aes_string(.x, fill=&quot;store_group&quot;))+
+               geom_bar()+
+               scale_fill_pdw()+
+               labs(title = glue::glue(&quot;Distribution for variable: {.x}&quot;))+
+               theme(plot.title = element_text(size = 15))
+)
+
+# reviewCol[[2]] #this is &quot;iter 1&quot;
+reviewCol</code></pre>
+<pre><code>## [[1]]</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+## [[2]]</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+## [[3]]</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-4-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+## [[4]]</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-4-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+## [[5]]</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-4-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+## [[6]]</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-4-6.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>## 
+## [[7]]</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-4-7.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="correlations" class="section level2">
+<h2>Correlations</h2>
+<pre class="r"><code>summary &lt;- dat %&gt;% 
+  group_by(store_group) %&gt;% 
+  summarise(avg_amnt = mean(weekly_velocity_amount),
+            n = n(),
+            std_amnt = sd(weekly_velocity_amount))
+
+dat %&gt;% 
+  ggplot(aes(store_group, weekly_velocity_amount, fill = store_group, color = store_group))+
+    geom_jitter(size = 0.5, width = .3)+
+    geom_violin(alpha=0.7)+
+    geom_point(data = summary, aes(store_group, avg_amnt), color= &quot;black&quot;, size = 2.5)</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary %&gt;% 
+  gt() %&gt;% 
+  fmt_number(columns = c(2,4), decimals = 2)</code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#mtlafvwgch .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mtlafvwgch .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mtlafvwgch .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mtlafvwgch .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mtlafvwgch .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mtlafvwgch .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mtlafvwgch .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mtlafvwgch .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mtlafvwgch .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mtlafvwgch .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mtlafvwgch .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mtlafvwgch .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mtlafvwgch .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mtlafvwgch .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mtlafvwgch .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mtlafvwgch .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mtlafvwgch .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#mtlafvwgch .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mtlafvwgch .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#mtlafvwgch .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mtlafvwgch .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mtlafvwgch .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mtlafvwgch .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mtlafvwgch .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mtlafvwgch .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#mtlafvwgch .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mtlafvwgch .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#mtlafvwgch .gt_left {
+  text-align: left;
+}
+
+#mtlafvwgch .gt_center {
+  text-align: center;
+}
+
+#mtlafvwgch .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mtlafvwgch .gt_font_normal {
+  font-weight: normal;
+}
+
+#mtlafvwgch .gt_font_bold {
+  font-weight: bold;
+}
+
+#mtlafvwgch .gt_font_italic {
+  font-style: italic;
+}
+
+#mtlafvwgch .gt_super {
+  font-size: 65%;
+}
+
+#mtlafvwgch .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="mtlafvwgch" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">store_group</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">avg_amnt</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">std_amnt</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">baseline_control</td>
+      <td class="gt_row gt_right">49.59</td>
+      <td class="gt_row gt_center">989</td>
+      <td class="gt_row gt_right">39.04</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">film_control</td>
+      <td class="gt_row gt_right">45.96</td>
+      <td class="gt_row gt_center">123</td>
+      <td class="gt_row gt_right">21.98</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">program_test</td>
+      <td class="gt_row gt_right">64.55</td>
+      <td class="gt_row gt_center">107</td>
+      <td class="gt_row gt_right">35.75</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 </div>
 <div id="what-do-we-see" class="section level2">
 <h2>What do we see</h2>

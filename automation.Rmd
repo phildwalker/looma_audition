@@ -32,3 +32,6 @@ what if the data came in a consistent manner and we just wanted to run the analy
 * git actions
 
 
+using parameterized reporting to have reports on demand
+
+

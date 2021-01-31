@@ -12,11 +12,16 @@ For this body of work, we have captured both the development cycle and deploymen
 There are 3 sections:  
 
 __1. The Analysis__
-  * I envision this section to be what could be shared with either an internal or external customer. 
-__1. The Methodology__    
-  * In here I will show what I did to get to the 
-__1. Automation Considerations__  
-  * In here I will talk about both what I have done in prior roles to automate my work and what I see as considerations when determining what to do next.
+
+* I envision this section to be what could be shared with either an internal or external customer. 
+
+__2. The Methodology__    
+
+* In here I will show what I did to get to the analysis section.
+
+__3. Automation Considerations__  
+
+* In here I will talk about both what I have done in prior roles to automate my work and what I see as considerations when determining what to do next.
 
 
 Notes:
