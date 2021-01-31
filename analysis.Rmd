@@ -15,48 +15,236 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 knitr::opts_chunk$set(fig.align = 'center')
 
 library(tidyverse)
-
+library(patchwork)
+library(pdwtheme)
+library(gt)
+library(infer)
 # To Turn off Scientific Notation Use this.
 options(scipen = 999)
+
+source("./src/looma_theme.R")
+
+dat <- read_csv(here::here("data-raw", "looma_audition_data.csv"))
+
 ```
 
 
-# Executive Summary
+# Executive Summary {.tabset .tabset-pills}
 
-__Prompt__
+<div class = "summaryblock">
+
+## Prompt
+
+__Prompt:__
 
 Imagine we ran an experiment to test the impact a Loop™ campaign has on sales. The experiment involved 42 stores in 3 groups:  
 
-* _“Program test”_ These stores had the full Loop™ campaign as it would normally run, with a display of featured products and a tablet showing 2-3 films in a looping playlist  
-* _“Film control”_ These stores had the full program but with the film from one brand (“Brewery A”) left out.   
-* _“Baseline control”_ These stores did not have Loop™ campaigns or featured products on display.  
+* _“Program test”_  These stores had the full Loop™ campaign as it would normally run, with a display of featured products and a tablet showing 2-3 films in a looping playlist  
+* _“Film control”_  These stores had the full program but with the film from one brand (“Brewery A”) left out.   
+* _“Baseline control”_  These stores did not have Loop™ campaigns or featured products on display.  
 
 Assume you need to provide an analysis of this experiment under time constraints (in reality, we expect you to devote 2-4 hours to this audition project).
 
-__Goal:__  
+## Goal  
+
+__Goal:__
 We want to know the impact the Loop™ campaign had on sales. By comparing the different groups we would like to learn a few different things:  
 
 * Does the Loop campaign affect store sales (Program Test & Film Control vs Baseline)  
-* What is the impact of the film of Brewery A on sales
+* What is the impact of the Loop Campaign of Brewery A on sales
  
  
-__Assumptions:__ 
-_(Note: this section would likely take a different shape as familarity with the data source increase/ relationship with the customer develops)_ 
+## Assumptions 
 
+__Assumptions:__
+_(Note: this section would likely take a different shape as familiarity with the data source increase/ relationship with the customer develops)_ 
 
-* Would be interesting in future iterations, to get a more detailed view of what is being purchased. 
+With this analysis we are assuming that: 
+
+* The type/size of stores are similar for the across the 3 groups. (ie if the groups were stratified by size then the resulting sales could be more a factor of store size and less the campaign)
+* The potential time of year impact is captured across the 3 groups (ie if beer/wine is most popular during Thanksgiving, that the store groups capture that time period similarly across groups)
+* The store regions are similar (ie the campaign might not be relevant to certain communities) 
+
+Potential Investigation Next Steps:  
+
+* It would be interesting in future iterations, to get a more detailed view of what is being purchased. This could potentially help to understand where the campaign leads to the purchase of (perceived) similar products. 
+* Depending on who the customer is, we might want to calculate the ROI of the Loop™ campaign 
  
- 
+## Results
+
 __Results:__
 From the analysis we find that:
 
-1. The program test and film control both show an increase in to sales velocity.
+1. The program test both show an increase in the mean sales (both amount and dollars) as compared to the baseline and the film control.  
+    * For this sample, it looks like it __increases sales of ~$15__ (just over 1 additional unit) on average as compared to the baseline  
 
 
-ANOVA to test for statistical significance
+</div>
 
 
-# Summary of Impact
+# Summary of Impact {.tabset .tabset-pills}
+
+## Avg Velocity Amount (Sales $)
+
+```{r}
+pval <- dat %>%
+  specify(weekly_velocity_amount ~ store_group) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(stat = "F") %>%
+  get_p_value(obs_stat = dat %>%
+                specify(weekly_velocity_amount ~ store_group) %>%
+                calculate(stat = "F"),
+              direction = "greater")%>% 
+  mutate(pval = ifelse(p_value < 0.001, "<0.001", scales::comma(p_value, accuracy = 0.0001)))
 
 
-# Digging into Results
+```
+
+
+This summary would seem to indicate that the mean of the weekly velocity amount (average weekly dollars in sales) were higher for s
+
+
+Using an ANOVA to see if the differences in the group means are statistically significant (resulting p-value of __`r pval$pval`__). We would conclude that one or more of the group's weekly velocity amounts are statistically different.
+
+<div class = "row">
+<div class = "col-md-8">
+
+```{r, out.width="100%"}
+summary <- dat %>% 
+  group_by(store_group) %>% 
+  summarise(avg_amnt = mean(weekly_velocity_amount),
+            n = n(),
+            std_amnt = sd(weekly_velocity_amount))
+
+dat %>% 
+  ggplot(aes(store_group, weekly_velocity_amount, fill = store_group, color = store_group))+
+    geom_jitter(size = 0.5, width = .3)+
+    geom_violin(alpha=0.7)+
+    geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)+
+    labs(title = "Comparison of Weekly Velocity Amount ($ Sales) by Store Group",
+         subtitle = "Points represent average weekly sales per promo period.",
+         x= NULL, y= "Weekly Sales")+
+    scale_y_continuous(labels = scales::dollar)+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    looma_theme()+
+    theme(legend.position = "none")
+
+```
+
+
+</div>
+<div class = "col-md-4">
+
+```{r, fig.width=4}
+summary %>% 
+  gt() %>% 
+  fmt_currency(columns = c(2,4), decimals = 2)%>% 
+  cols_move(
+    columns = vars(n),
+    after = vars(std_amnt)
+  ) %>%
+  cols_label(
+    store_group = "Store Group",
+    avg_amnt = "Group Average",
+    std_amnt = "Group SD",
+    n = "Total Periods"
+  ) %>%
+  tab_header(
+    title = md("Summary of Average Weekly Sales"),
+    subtitle = "For Brewery A's Loop Campaign"
+  ) %>% 
+  tab_options(
+    container.width = "110%"
+  )
+```
+
+</div>
+</div>
+
+
+## Avg Velocity Quantity (Sale Units) 
+
+```{r}
+pval <- dat %>%
+  specify(weekly_velocity_quantity ~ store_group) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10000, type = "permute") %>%
+  calculate(stat = "F") %>%
+  get_p_value(obs_stat = dat %>%
+                specify(weekly_velocity_quantity ~ store_group) %>%
+                calculate(stat = "F"),
+              direction = "greater") %>% 
+  mutate(pval = ifelse(p_value < 0.001, "<0.001", scales::comma(p_value, accuracy = 0.0001)))
+
+
+```
+
+
+
+This summary would seem to indicate that the mean of the weekly velocity amount (average weekly units in sales) were higher for sale groups.
+
+
+Using an ANOVA to see if the differences in the group means are statistically significant (resulting p-value of __`r pval$pval`__). We would conclude that one or more of the group's weekly velocity amounts are statistically different.
+
+<div class = "row">
+<div class = "col-md-8">
+
+
+```{r, out.width="100%"}
+summary <- dat %>% 
+  group_by(store_group) %>% 
+  summarise(avg_amnt = mean(weekly_velocity_quantity),
+            n = n(),
+            std_amnt = sd(weekly_velocity_quantity))
+
+dat %>% 
+  ggplot(aes(store_group, weekly_velocity_quantity, fill = store_group, color = store_group))+
+    geom_jitter(size = 0.5, width = .3)+
+    geom_violin(alpha=0.7)+
+    geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)+
+    labs(title = "Comparison of Weekly Velocity Quantity by Store Group",
+         subtitle = "Points represent average weekly sales per promo period",
+         x = NULL, y= "Weekly Sales")+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    looma_theme()+
+    theme(legend.position = "none")
+```
+
+</div>
+<div class = "col-md-4">
+
+```{r}
+summary %>% 
+  gt() %>% 
+  fmt_number(columns = c(2,4), decimals = 1) %>% 
+  cols_move(
+    columns = vars(n),
+    after = vars(std_amnt)
+  ) %>%
+  cols_label(
+    store_group = "Store Group",
+    avg_amnt = "Group Average",
+    std_amnt = "Group SD",
+    n = "Total Periods"
+  ) %>%
+  tab_header(
+    title = md("Summary of Weekly Units"),
+    subtitle = "For Brewery A's Loop Campaign"
+  ) %>% 
+  tab_options(
+    container.width = "110%"
+  )
+```
+
+</div>
+</div>
+
+
+
+
+
+
+

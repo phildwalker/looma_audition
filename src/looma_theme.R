@@ -18,7 +18,8 @@ looma_theme <- function () {
       
       plot.subtitle = element_text(          #subtitle
         family = font,            #font family
-        size = 12),               #font size
+        size = 16,   #font size
+        hjust = 0),               
       
       plot.caption = element_text(           #caption
         family = font,            #font family
@@ -27,11 +28,11 @@ looma_theme <- function () {
       
       axis.title = element_text(             #axis titles
         family = font,            #font family
-        size = 10),               #font size
+        size = 14),               #font size
       
       axis.text = element_text(              #axis text
         family = font,            #axis famuly
-        size = 9),                #font size
+        size = 14),                #font size
       
       axis.text.x = element_text(            #margin for axis text
         margin=margin(5, b = 10))
