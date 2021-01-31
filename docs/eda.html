@@ -453,8 +453,8 @@ div.tocify {
 <pre class="r"><code>dat &lt;- read_csv(here::here(&quot;data-raw&quot;, &quot;looma_audition_data.csv&quot;))
 
 colnames &lt;- colnames(dat)</code></pre>
-<div id="their-notes" class="section level2">
-<h2>Their Notes</h2>
+<div id="data-notes" class="section level2">
+<h2>Data Notes</h2>
 <p>The csv file provided contains sample data for analysis. We receive raw data at the transaction level, with one row per customer and item purchased, with timestamps. The sample data is an aggregate of this at the “promotional period” level. Each campaign runs for one promotional period at a time. These periods vary between 3 and 5 weeks in length, so we provide sales in this data as “weekly velocity”, meaning average sales per week during each period.</p>
 <p>Specifically, the dataset contains these columns:</p>
 <ul>
@@ -492,6 +492,9 @@ colnames &lt;- colnames(dat)</code></pre>
 <pre class="r"><code>naniar::vis_miss(dat)</code></pre>
 <p><img src="eda_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
+</div>
+<div id="first-pass-review" class="section level1 tabset tabset-pills">
+<h1 class="tabset tabset-pills">First Pass Review</h1>
 <div id="distributions-of-data" class="section level2">
 <h2>Distributions of Data</h2>
 <pre class="r"><code>reviewCol &lt;- 
@@ -547,7 +550,7 @@ dat %&gt;%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#mtlafvwgch .gt_table {
+#dbiwxmqozc .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -572,7 +575,7 @@ dat %&gt;%
   border-left-color: #D3D3D3;
 }
 
-#mtlafvwgch .gt_heading {
+#dbiwxmqozc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -584,7 +587,7 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#mtlafvwgch .gt_title {
+#dbiwxmqozc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -594,7 +597,7 @@ dat %&gt;%
   border-bottom-width: 0;
 }
 
-#mtlafvwgch .gt_subtitle {
+#dbiwxmqozc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -604,13 +607,13 @@ dat %&gt;%
   border-top-width: 0;
 }
 
-#mtlafvwgch .gt_bottom_border {
+#dbiwxmqozc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mtlafvwgch .gt_col_headings {
+#dbiwxmqozc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -625,7 +628,7 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#mtlafvwgch .gt_col_heading {
+#dbiwxmqozc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -645,7 +648,7 @@ dat %&gt;%
   overflow-x: hidden;
 }
 
-#mtlafvwgch .gt_column_spanner_outer {
+#dbiwxmqozc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -657,15 +660,15 @@ dat %&gt;%
   padding-right: 4px;
 }
 
-#mtlafvwgch .gt_column_spanner_outer:first-child {
+#dbiwxmqozc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mtlafvwgch .gt_column_spanner_outer:last-child {
+#dbiwxmqozc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mtlafvwgch .gt_column_spanner {
+#dbiwxmqozc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -677,7 +680,7 @@ dat %&gt;%
   width: 100%;
 }
 
-#mtlafvwgch .gt_group_heading {
+#dbiwxmqozc .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -699,7 +702,7 @@ dat %&gt;%
   vertical-align: middle;
 }
 
-#mtlafvwgch .gt_empty_group_heading {
+#dbiwxmqozc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -714,15 +717,15 @@ dat %&gt;%
   vertical-align: middle;
 }
 
-#mtlafvwgch .gt_from_md > :first-child {
+#dbiwxmqozc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mtlafvwgch .gt_from_md > :last-child {
+#dbiwxmqozc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mtlafvwgch .gt_row {
+#dbiwxmqozc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -741,7 +744,7 @@ dat %&gt;%
   overflow-x: hidden;
 }
 
-#mtlafvwgch .gt_stub {
+#dbiwxmqozc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -753,7 +756,7 @@ dat %&gt;%
   padding-left: 12px;
 }
 
-#mtlafvwgch .gt_summary_row {
+#dbiwxmqozc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -763,7 +766,7 @@ dat %&gt;%
   padding-right: 5px;
 }
 
-#mtlafvwgch .gt_first_summary_row {
+#dbiwxmqozc .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -773,7 +776,7 @@ dat %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#mtlafvwgch .gt_grand_summary_row {
+#dbiwxmqozc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -783,7 +786,7 @@ dat %&gt;%
   padding-right: 5px;
 }
 
-#mtlafvwgch .gt_first_grand_summary_row {
+#dbiwxmqozc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -793,11 +796,11 @@ dat %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#mtlafvwgch .gt_striped {
+#dbiwxmqozc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mtlafvwgch .gt_table_body {
+#dbiwxmqozc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -806,7 +809,7 @@ dat %&gt;%
   border-bottom-color: #D3D3D3;
 }
 
-#mtlafvwgch .gt_footnotes {
+#dbiwxmqozc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -820,13 +823,13 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#mtlafvwgch .gt_footnote {
+#dbiwxmqozc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#mtlafvwgch .gt_sourcenotes {
+#dbiwxmqozc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -840,46 +843,46 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#mtlafvwgch .gt_sourcenote {
+#dbiwxmqozc .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#mtlafvwgch .gt_left {
+#dbiwxmqozc .gt_left {
   text-align: left;
 }
 
-#mtlafvwgch .gt_center {
+#dbiwxmqozc .gt_center {
   text-align: center;
 }
 
-#mtlafvwgch .gt_right {
+#dbiwxmqozc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mtlafvwgch .gt_font_normal {
+#dbiwxmqozc .gt_font_normal {
   font-weight: normal;
 }
 
-#mtlafvwgch .gt_font_bold {
+#dbiwxmqozc .gt_font_bold {
   font-weight: bold;
 }
 
-#mtlafvwgch .gt_font_italic {
+#dbiwxmqozc .gt_font_italic {
   font-style: italic;
 }
 
-#mtlafvwgch .gt_super {
+#dbiwxmqozc .gt_super {
   font-size: 65%;
 }
 
-#mtlafvwgch .gt_footnote_marks {
+#dbiwxmqozc .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="mtlafvwgch" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="dbiwxmqozc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -913,8 +916,15 @@ dat %&gt;%
   
 </table></div>
 </div>
-<div id="what-do-we-see" class="section level2">
-<h2>What do we see</h2>
+</div>
+<div id="investigatings-effect" class="section level1">
+<h1>Investigatings Effect</h1>
+<div id="is-there-an-overall-improvement" class="section level2">
+<h2>Is there an overall improvement?</h2>
+</div>
+<div id="is-there-a-potential-store-dependency" class="section level2">
+<h2>Is there a potential store dependency?</h2>
+<p>Can we know if that’s the case?</p>
 </div>
 </div>
 

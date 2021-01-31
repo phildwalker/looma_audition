@@ -2,7 +2,7 @@
 clear:initial !important;
 }
 
-th{background-color: #18254f;
+th{background-color: #dc572e;
 color:white}
 
 tr{color:#00205C}
@@ -47,7 +47,7 @@ a {
   color: #18254f;
 }
 a:hover, a:focus {
-  color: #00205C;
+  color: #dc572e;
 }
 .btn {
   border-width: 0 0px 0px 0px;
@@ -72,7 +72,7 @@ a:hover, a:focus {
 
 .nav-pills > li.active > a:hover {
   color: #00205C;
-    background-color: #18254f;
+    background-color: #dc572e;
 }
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
@@ -234,7 +234,7 @@ div.sourceCode {
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, .distill-site-nav a:hover, .distill-site-nav a:focus {
     color: white;
-    background-color: #012169;
+    background-color: #dc572e;
 }
 
 
@@ -252,12 +252,12 @@ div.sourceCode {
 
 .navbar-default .navbar-nav>.open>a:hover{
     background-color: transparent;
-    color: #18254f;
+    color: #dc572e;
 }
 
 .navbar-default .navbar-nav>.open>a:focus {
   background-color: transparent;
-    color: #18254f;
+    color: #dc572e;
 }
 
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
@@ -271,7 +271,7 @@ div.sourceCode {
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
-    background-color: #012169;
+    background-color: #dc572e;
 
 
     color: white;
@@ -284,7 +284,7 @@ padding-top:inherit;
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
     color: white;
     text-decoration: none;
-    background-color: #012169;
+    background-color: #dc572e;
 }
 
 

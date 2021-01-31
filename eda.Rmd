@@ -41,7 +41,7 @@ dat <- read_csv(here::here("data-raw", "looma_audition_data.csv"))
 colnames <- colnames(dat)
 ```
 
-## Their Notes
+## Data Notes
 
 The csv file provided contains sample data for analysis. We receive raw data at the transaction level, with one row per customer and item purchased, with timestamps. The sample data is an aggregate of this at the “promotional period” level. Each campaign runs for one promotional period at a time. These periods vary between 3 and 5 weeks in length, so we provide sales in this data as “weekly velocity”, meaning average sales per week during each period.
 
@@ -69,6 +69,9 @@ glimpse(dat)
 ```{r}
 naniar::vis_miss(dat)
 ```
+
+# First Pass Review {.tabset .tabset-pills}
+
 
 ## Distributions of Data
 
@@ -113,7 +116,22 @@ summary %>%
 
 
 
-## What do we see
+# Investigatings Effect
+
+
+## Is there an overall improvement?
+
+
+## Is there a potential store dependency?
+Can we know if that's the case?
+
+
+
+
+
+
+
+
 
 
 
