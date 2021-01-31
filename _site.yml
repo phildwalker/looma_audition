@@ -9,7 +9,7 @@ navbar:
     - text: "Methodology"
       icon: fa-lightbulb
       href: eda.html
-    - text: "Automation"  
+    - text: "Scaling Analysis"  
       icon: fa-seedling
       href: automation.html
 

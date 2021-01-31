@@ -40,13 +40,20 @@ We want to know the impact the Loop™ campaign had on sales. By comparing the d
 * What is the impact of the film of Brewery A on sales
  
  
+__Assumptions:__ 
+_(Note: this section would likely take a different shape as familarity with the data source increase/ relationship with the customer develops)_ 
+
+
+* Would be interesting in future iterations, to get a more detailed view of what is being purchased. 
+ 
+ 
 __Results:__
 From the analysis we find that:
 
 1. The program test and film control both show an increase in to sales velocity.
 
 
-chi-square test for statistical difference? 
+ANOVA to test for statistical significance
 
 
 # Summary of Impact

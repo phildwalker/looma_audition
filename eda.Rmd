@@ -10,13 +10,13 @@ editor_options:
   chunk_output_type: console
 ---
 
-This is how the analysis was performed...  
+# Goal
+To help show my process for:
 
 * ingesting the dataset  
 * exploring the results  
 * developing the cleaned views  
 
-Code will be visible here (probably show/hide code chunks)
 
 ```{r setup, include = F}
 knitr::opts_chunk$set(echo = T, message = FALSE, warning = FALSE)

@@ -422,7 +422,7 @@ div.tocify {
   <a href="automation.html">
     <span class="fas fa-seedling"></span>
      
-    Automation
+    Scaling Analysis
   </a>
 </li>
       </ul>
@@ -451,7 +451,9 @@ div.tocify {
 </div>
 
 
-<p>This is how the analysis was performed…</p>
+<div id="goal" class="section level1">
+<h1>Goal</h1>
+<p>To help show my process for:</p>
 <ul>
 <li>ingesting the dataset<br />
 </li>
@@ -459,7 +461,7 @@ div.tocify {
 </li>
 <li>developing the cleaned views</li>
 </ul>
-<p>Code will be visible here (probably show/hide code chunks)</p>
+</div>
 <div id="read-in-data" class="section level1 tabset tabset-pills">
 <h1 class="tabset tabset-pills">Read In Data</h1>
 <pre class="r"><code>dat &lt;- read_csv(here::here(&quot;data-raw&quot;, &quot;looma_audition_data.csv&quot;))
@@ -569,7 +571,7 @@ dat %&gt;%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#icrusrzqce .gt_table {
+#mmktwhlswy .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -594,7 +596,7 @@ dat %&gt;%
   border-left-color: #D3D3D3;
 }
 
-#icrusrzqce .gt_heading {
+#mmktwhlswy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -606,7 +608,7 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#icrusrzqce .gt_title {
+#mmktwhlswy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -616,7 +618,7 @@ dat %&gt;%
   border-bottom-width: 0;
 }
 
-#icrusrzqce .gt_subtitle {
+#mmktwhlswy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -626,13 +628,13 @@ dat %&gt;%
   border-top-width: 0;
 }
 
-#icrusrzqce .gt_bottom_border {
+#mmktwhlswy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#icrusrzqce .gt_col_headings {
+#mmktwhlswy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -647,7 +649,7 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#icrusrzqce .gt_col_heading {
+#mmktwhlswy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -667,7 +669,7 @@ dat %&gt;%
   overflow-x: hidden;
 }
 
-#icrusrzqce .gt_column_spanner_outer {
+#mmktwhlswy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -679,15 +681,15 @@ dat %&gt;%
   padding-right: 4px;
 }
 
-#icrusrzqce .gt_column_spanner_outer:first-child {
+#mmktwhlswy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#icrusrzqce .gt_column_spanner_outer:last-child {
+#mmktwhlswy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#icrusrzqce .gt_column_spanner {
+#mmktwhlswy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -699,7 +701,7 @@ dat %&gt;%
   width: 100%;
 }
 
-#icrusrzqce .gt_group_heading {
+#mmktwhlswy .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -721,7 +723,7 @@ dat %&gt;%
   vertical-align: middle;
 }
 
-#icrusrzqce .gt_empty_group_heading {
+#mmktwhlswy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -736,15 +738,15 @@ dat %&gt;%
   vertical-align: middle;
 }
 
-#icrusrzqce .gt_from_md > :first-child {
+#mmktwhlswy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#icrusrzqce .gt_from_md > :last-child {
+#mmktwhlswy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#icrusrzqce .gt_row {
+#mmktwhlswy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -763,7 +765,7 @@ dat %&gt;%
   overflow-x: hidden;
 }
 
-#icrusrzqce .gt_stub {
+#mmktwhlswy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -775,7 +777,7 @@ dat %&gt;%
   padding-left: 12px;
 }
 
-#icrusrzqce .gt_summary_row {
+#mmktwhlswy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -785,7 +787,7 @@ dat %&gt;%
   padding-right: 5px;
 }
 
-#icrusrzqce .gt_first_summary_row {
+#mmktwhlswy .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -795,7 +797,7 @@ dat %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#icrusrzqce .gt_grand_summary_row {
+#mmktwhlswy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -805,7 +807,7 @@ dat %&gt;%
   padding-right: 5px;
 }
 
-#icrusrzqce .gt_first_grand_summary_row {
+#mmktwhlswy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -815,11 +817,11 @@ dat %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#icrusrzqce .gt_striped {
+#mmktwhlswy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#icrusrzqce .gt_table_body {
+#mmktwhlswy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -828,7 +830,7 @@ dat %&gt;%
   border-bottom-color: #D3D3D3;
 }
 
-#icrusrzqce .gt_footnotes {
+#mmktwhlswy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -842,13 +844,13 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#icrusrzqce .gt_footnote {
+#mmktwhlswy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#icrusrzqce .gt_sourcenotes {
+#mmktwhlswy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -862,46 +864,46 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#icrusrzqce .gt_sourcenote {
+#mmktwhlswy .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#icrusrzqce .gt_left {
+#mmktwhlswy .gt_left {
   text-align: left;
 }
 
-#icrusrzqce .gt_center {
+#mmktwhlswy .gt_center {
   text-align: center;
 }
 
-#icrusrzqce .gt_right {
+#mmktwhlswy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#icrusrzqce .gt_font_normal {
+#mmktwhlswy .gt_font_normal {
   font-weight: normal;
 }
 
-#icrusrzqce .gt_font_bold {
+#mmktwhlswy .gt_font_bold {
   font-weight: bold;
 }
 
-#icrusrzqce .gt_font_italic {
+#mmktwhlswy .gt_font_italic {
   font-style: italic;
 }
 
-#icrusrzqce .gt_super {
+#mmktwhlswy .gt_super {
   font-size: 65%;
 }
 
-#icrusrzqce .gt_footnote_marks {
+#mmktwhlswy .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="icrusrzqce" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="mmktwhlswy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -993,7 +995,7 @@ dat %&gt;%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#coslciwjym .gt_table {
+#adcdmeqovl .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1018,7 +1020,7 @@ dat %&gt;%
   border-left-color: #D3D3D3;
 }
 
-#coslciwjym .gt_heading {
+#adcdmeqovl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1030,7 +1032,7 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#coslciwjym .gt_title {
+#adcdmeqovl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1040,7 +1042,7 @@ dat %&gt;%
   border-bottom-width: 0;
 }
 
-#coslciwjym .gt_subtitle {
+#adcdmeqovl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1050,13 +1052,13 @@ dat %&gt;%
   border-top-width: 0;
 }
 
-#coslciwjym .gt_bottom_border {
+#adcdmeqovl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#coslciwjym .gt_col_headings {
+#adcdmeqovl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1071,7 +1073,7 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#coslciwjym .gt_col_heading {
+#adcdmeqovl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1091,7 +1093,7 @@ dat %&gt;%
   overflow-x: hidden;
 }
 
-#coslciwjym .gt_column_spanner_outer {
+#adcdmeqovl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1103,15 +1105,15 @@ dat %&gt;%
   padding-right: 4px;
 }
 
-#coslciwjym .gt_column_spanner_outer:first-child {
+#adcdmeqovl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#coslciwjym .gt_column_spanner_outer:last-child {
+#adcdmeqovl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#coslciwjym .gt_column_spanner {
+#adcdmeqovl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1123,7 +1125,7 @@ dat %&gt;%
   width: 100%;
 }
 
-#coslciwjym .gt_group_heading {
+#adcdmeqovl .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1145,7 +1147,7 @@ dat %&gt;%
   vertical-align: middle;
 }
 
-#coslciwjym .gt_empty_group_heading {
+#adcdmeqovl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1160,15 +1162,15 @@ dat %&gt;%
   vertical-align: middle;
 }
 
-#coslciwjym .gt_from_md > :first-child {
+#adcdmeqovl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#coslciwjym .gt_from_md > :last-child {
+#adcdmeqovl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#coslciwjym .gt_row {
+#adcdmeqovl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1187,7 +1189,7 @@ dat %&gt;%
   overflow-x: hidden;
 }
 
-#coslciwjym .gt_stub {
+#adcdmeqovl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1199,7 +1201,7 @@ dat %&gt;%
   padding-left: 12px;
 }
 
-#coslciwjym .gt_summary_row {
+#adcdmeqovl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1209,7 +1211,7 @@ dat %&gt;%
   padding-right: 5px;
 }
 
-#coslciwjym .gt_first_summary_row {
+#adcdmeqovl .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1219,7 +1221,7 @@ dat %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#coslciwjym .gt_grand_summary_row {
+#adcdmeqovl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1229,7 +1231,7 @@ dat %&gt;%
   padding-right: 5px;
 }
 
-#coslciwjym .gt_first_grand_summary_row {
+#adcdmeqovl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1239,11 +1241,11 @@ dat %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#coslciwjym .gt_striped {
+#adcdmeqovl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#coslciwjym .gt_table_body {
+#adcdmeqovl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1252,7 +1254,7 @@ dat %&gt;%
   border-bottom-color: #D3D3D3;
 }
 
-#coslciwjym .gt_footnotes {
+#adcdmeqovl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1266,13 +1268,13 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#coslciwjym .gt_footnote {
+#adcdmeqovl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#coslciwjym .gt_sourcenotes {
+#adcdmeqovl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1286,46 +1288,46 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#coslciwjym .gt_sourcenote {
+#adcdmeqovl .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#coslciwjym .gt_left {
+#adcdmeqovl .gt_left {
   text-align: left;
 }
 
-#coslciwjym .gt_center {
+#adcdmeqovl .gt_center {
   text-align: center;
 }
 
-#coslciwjym .gt_right {
+#adcdmeqovl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#coslciwjym .gt_font_normal {
+#adcdmeqovl .gt_font_normal {
   font-weight: normal;
 }
 
-#coslciwjym .gt_font_bold {
+#adcdmeqovl .gt_font_bold {
   font-weight: bold;
 }
 
-#coslciwjym .gt_font_italic {
+#adcdmeqovl .gt_font_italic {
   font-style: italic;
 }
 
-#coslciwjym .gt_super {
+#adcdmeqovl .gt_super {
   font-size: 65%;
 }
 
-#coslciwjym .gt_footnote_marks {
+#adcdmeqovl .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="coslciwjym" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="adcdmeqovl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -1404,8 +1406,8 @@ p_value</code></pre>
   count(store_id, store_group, period_year) %&gt;% 
   pivot_wider(names_from= period_year, values_from = n) %&gt;% 
   DT::datatable(rownames = F, filter = c(&quot;top&quot;))</code></pre>
-<div id="htmlwidget-038a6585e3354da9066c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-038a6585e3354da9066c">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"42\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"3\" data-max=\"9\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"5\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"11\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42],["baseline_control","baseline_control","baseline_control","baseline_control","program_test","baseline_control","baseline_control","baseline_control","film_control","baseline_control","program_test","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","film_control","program_test","baseline_control","program_test","baseline_control","film_control","baseline_control","baseline_control","film_control","baseline_control"],[8,8,7,7,6,7,8,7,7,8,7,7,5,3,7,3,6,8,6,7,6,7,8,9,7,6,6,8,4,8,7,8,7,null,7,6,8,7,null,7,6,null],[13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,8,13,13,13,13,10,13,13,13,13,11,13,13,13,13,13,5,13,13,13,13,13,13,13,null],[11,11,11,11,11,11,11,11,11,11,11,11,11,11,10,11,10,9,11,11,11,11,1,11,11,11,11,10,11,11,11,11,11,11,11,11,11,11,11,11,11,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>store_id<\/th>\n      <th>store_group<\/th>\n      <th>2018<\/th>\n      <th>2019<\/th>\n      <th>2020<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ad4cdb5f41f8f4ff0d11" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ad4cdb5f41f8f4ff0d11">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"42\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"3\" data-max=\"9\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"5\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"11\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42],["baseline_control","baseline_control","baseline_control","baseline_control","program_test","baseline_control","baseline_control","baseline_control","film_control","baseline_control","program_test","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","film_control","program_test","baseline_control","program_test","baseline_control","film_control","baseline_control","baseline_control","film_control","baseline_control"],[8,8,7,7,6,7,8,7,7,8,7,7,5,3,7,3,6,8,6,7,6,7,8,9,7,6,6,8,4,8,7,8,7,null,7,6,8,7,null,7,6,null],[13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,8,13,13,13,13,10,13,13,13,13,11,13,13,13,13,13,5,13,13,13,13,13,13,13,null],[11,11,11,11,11,11,11,11,11,11,11,11,11,11,10,11,10,9,11,11,11,11,1,11,11,11,11,10,11,11,11,11,11,11,11,11,11,11,11,11,11,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>store_id<\/th>\n      <th>store_group<\/th>\n      <th>2018<\/th>\n      <th>2019<\/th>\n      <th>2020<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="investigatings-effect" class="section level1 tabset tabset-pills">
 <h1 class="tabset tabset-pills">Investigatings Effect</h1>

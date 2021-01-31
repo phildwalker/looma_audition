@@ -11,7 +11,7 @@
 
 
 
-<title>Automation Considersations</title>
+<title>Scaling Analysis Considersations</title>
 
 <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -20,9 +20,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
@@ -296,69 +293,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -366,16 +300,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -410,7 +334,7 @@ div.tocify {
   <a href="automation.html">
     <span class="fas fa-seedling"></span>
      
-    Automation
+    Scaling Analysis
   </a>
 </li>
       </ul>
@@ -433,28 +357,63 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Automation Considersations</h1>
+<h1 class="title toc-ignore">Scaling Analysis Considersations</h1>
 <h4 class="date">Last Updated: 31 January, 2021</h4>
 
 </div>
 
 
-<p>This is where we talk about how we would automate a process like this…</p>
-<p>presenting a few different considerations..</p>
-<p>what if we are working on personal windows machines?</p>
-<p>what if we are working on a centralized linux server?</p>
-<p>what if the data come in batches?</p>
-<p>what if the data needs to be cleaned/ validated before we would push it out?</p>
-<p>what if the data came in a consistent manner and we just wanted to run the analysis so it was “ready in the morning”</p>
+<div id="situation" class="section level1">
+<h1>Situation</h1>
+<p>“Imagine that after this analysis is complete, you learn that we plan to run this type of experiment frequently in the future, perhaps dozens of times a month.”</p>
+</div>
+<div id="considersations" class="section level1">
+<h1>Considersations</h1>
+<p>In prior roles when the discussion of some degree of scaling up/ “productionizing” an analysis I have found the highest degree of success when I understand customer goals. Though sometimes expressed as wanting “everything yesterday”, I’ve found that the heart of the ask falls in which of the two potential paths: “Increasing the Speed” or “Expanding the Scope” (though often that ask falls in a degree of both).</p>
+<p>Foundational to both of the potential paths above is understanding the fidelity of the data source(s)/ data pipeline. If there is low confidence in the data source, there is probably going to need to be a fair amount of work with the customer to either stabilize the data generation/sharing process or in the alignment of customer expectations with the data reality (the GIGO conversation).</p>
+<p>Finally if there is a degree of stability in both the input and output expectations, to help improve the code sharability/ development cycle I would look to ensure we were using functions + internal packages where possible to help produce consistent outputs.</p>
+<p><br></p>
+<div id="increasing-speed-of-outputs" class="section level2">
+<h2>Increasing Speed of Outputs</h2>
+<p>In terms of the decreasing the time from data to insight, I’ve found success working along a spectrum of potential methods depending on the nature of the work. This spectrum ranges from:</p>
+<ol style="list-style-type: decimal">
+<li>Deploying shiny app where the customer has access to a fairly standardized consistent output with updated data sources when that data becomes available.
 <ul>
-<li>make files</li>
-<li>windows scheduler / cron jobs
-<ul>
-<li>emails/ alerts when completed to have a “human in the loop” development cycle</li>
+<li><strong>Benefits:</strong> Fastest</li>
+<li><strong>Drawbacks:</strong> Most robust if desired output + incoming data source is consistent<br />
+</li>
 </ul></li>
-<li>git actions</li>
-</ul>
-<p>using parameterized reporting to have reports on demand</p>
+<li>On-demand report via parameterized reporting
+<ul>
+<li><strong>Benefits:</strong> Development cycle likely faster than a shiny app and would easily allow for an offline report to be outputted (easier distribution to external customers).<br />
+</li>
+<li><strong>Drawbacks:</strong> This framework would likely depend on having RStudio Connect deployed (and $ invested)/ would likely not be used for external customers<br />
+</li>
+</ul></li>
+<li>Setting up an “analyst in the loop” with scheduled jobs. Would want to consider infrastructure used.. using windows or linux (scheduler vs cron job), which would likely kick off a makefile/ setting up github actions. The reports would then output locally (send email when complete to alert),and would then be available for internal review/ revision/ further investigation before sharing with customer.
+<ul>
+<li><strong>Benefits:</strong> Allows for adjusting to shifting demands/ inconsistent data sources before exposing variability to customer.</li>
+<li><strong>Drawbacks:</strong> Slower feedback cycle to customer than other options above (though faster than doing manually).</li>
+</ul></li>
+</ol>
+</div>
+<div id="expanding-scope" class="section level2">
+<h2>Expanding Scope</h2>
+<p>This path of work has the potential to greatly shift nature of the work (ie considerations around likely scope creep). In the conversation with the customer, I would look for a couple different themes in helping to determine the potential scope of work.</p>
+<p><strong>Potential Themes</strong></p>
+<ol style="list-style-type: decimal">
+<li>More Store data:
+<ul>
+<li>This could be a really easy change if the data source isn’t changing, and we are essentially getting more data. In this case, I would validate that the data and analysis pipeline doesn’t have inadvertent hard-coded selections (ie only looking for specific store ids, etc) and if not, than ideally would be able to refresh with minimal additional work.<br />
+</li>
+</ul></li>
+<li>Different types of stores/ experiments/ additional variables:
+<ul>
+<li>This could impact how the analysis is stratified, and I would communicate that there would likely be a little bit of pre-work before committing to the new body of work.</li>
+</ul></li>
+</ol>
+</div>
+</div>
 
 &nbsp;
 &nbsp;
@@ -471,8 +430,6 @@ div.tocify {
 </font>
 
 
-</div>
-</div>
 
 </div>
 
@@ -510,32 +467,6 @@ $(document).ready(function () {
 });
 </script>
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
