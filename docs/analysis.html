@@ -460,7 +460,10 @@ div.tocify {
 <p><strong>Goal:</strong></p>
 <p>We want to know the impact the Loop™ campaign had on sales. By comparing the different groups we would like to learn a few different things:</p>
 <ul>
-<li>Is there an impact of the “Brewery A” Loop™ Campaign on sales?</li>
+<li>Is there an impact of the “Brewery A” Loop™ Campaign on sales?
+<ul>
+<li>If we see that the “program_test” condition has increased sales as compared to both the baseline and the “film_control” condition we can be confident that it was Brewery A’s film that had the affect on sales and not just the slick Loop™ campaign ipad with the other videos.</li>
+</ul></li>
 <li>If so what is the impact? (Sales amount vs sales dollars)</li>
 </ul>
 </div>
@@ -487,9 +490,9 @@ From the analysis we find that:</p>
 <li>This could mean that the brand awareness for the Brewery has generally increased over time.</li>
 <li>Could be a Covid affect (more people trying beer) or that there were more options made available to customers over time.</li>
 </ul></li>
-<li>The program test both show an increase in the mean sales (both amount and dollars) as compared to the baseline and the film control.
+<li>The “program test” both show an increase in the mean sales (both amount and dollars) as compared to the baseline and the film control.
 <ul>
-<li>For this sample, it looks like it <strong>increased Brewery A sales on average by ~$15</strong> (roughly 1 additional unit) on average as compared to the baseline</li>
+<li>For this sample, it looks like the Loop™ campaign <strong>increased Brewery A sales on average by ~$15</strong> (roughly 1 additional unit) on average as compared to the baseline</li>
 </ul></li>
 </ol>
 <p><strong>Potential Investigation Next Steps:</strong></p>
@@ -506,8 +509,13 @@ From the analysis we find that:</p>
 <h1 class="tabset tabset-pills">Summary of Impact</h1>
 <div id="avg-velocity-amount-sales" class="section level2">
 <h2>Avg Velocity Amount (Sales $)</h2>
-<p>When grouping all of the years together by experimental condition (“store_group”)</p>
-<p>Using an ANOVA to see if the differences in the group means are statistically significant (resulting p-value of <strong>&lt;0.001</strong>). We would conclude that one or more of the group’s weekly velocity amounts are statistically different.</p>
+<p>When grouping all of the years together by experimental condition (“store_group”), we see that the by-period sales are higher on average when the Loop™ campaign is fully utilized for Brewery A.</p>
+<p>To understand if the differences could be due to random chance, we use an ANOVA to see if the differences in the group means are statistically significant. With a resulting p-value of <strong>&lt;0.001</strong>, we can conclude that the sale dollars are positively impacted by the campaign.</p>
+<p>The visual below helps us to understand of the nature of the sale distribution varies for the different conditions.</p>
+<ul>
+<li>For example we see the widest part of the baseline group is around <code>$30-40</code> indicating that the majority of the sales occur in that range (though sometimes sales exceed $200).</li>
+<li>In contrast the widest part of the “program_test” group is above <code>$50</code>, indicating that a high degree of the average weekly Brewery A sales in stores with the Loop™ are frequently higher than the baseline stores.</li>
+</ul>
 <div class="row">
 <div class="col-md-8">
 <p><img src="analysis_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" /></p>
@@ -517,7 +525,7 @@ From the analysis we find that:</p>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#idqktronpp .gt_table {
+#syxvjwkurc .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -542,7 +550,7 @@ From the analysis we find that:</p>
   border-left-color: #D3D3D3;
 }
 
-#idqktronpp .gt_heading {
+#syxvjwkurc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -554,7 +562,7 @@ From the analysis we find that:</p>
   border-right-color: #D3D3D3;
 }
 
-#idqktronpp .gt_title {
+#syxvjwkurc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -564,7 +572,7 @@ From the analysis we find that:</p>
   border-bottom-width: 0;
 }
 
-#idqktronpp .gt_subtitle {
+#syxvjwkurc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -574,13 +582,13 @@ From the analysis we find that:</p>
   border-top-width: 0;
 }
 
-#idqktronpp .gt_bottom_border {
+#syxvjwkurc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#idqktronpp .gt_col_headings {
+#syxvjwkurc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -595,7 +603,7 @@ From the analysis we find that:</p>
   border-right-color: #D3D3D3;
 }
 
-#idqktronpp .gt_col_heading {
+#syxvjwkurc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -615,7 +623,7 @@ From the analysis we find that:</p>
   overflow-x: hidden;
 }
 
-#idqktronpp .gt_column_spanner_outer {
+#syxvjwkurc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -627,15 +635,15 @@ From the analysis we find that:</p>
   padding-right: 4px;
 }
 
-#idqktronpp .gt_column_spanner_outer:first-child {
+#syxvjwkurc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#idqktronpp .gt_column_spanner_outer:last-child {
+#syxvjwkurc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#idqktronpp .gt_column_spanner {
+#syxvjwkurc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -647,7 +655,7 @@ From the analysis we find that:</p>
   width: 100%;
 }
 
-#idqktronpp .gt_group_heading {
+#syxvjwkurc .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -669,7 +677,7 @@ From the analysis we find that:</p>
   vertical-align: middle;
 }
 
-#idqktronpp .gt_empty_group_heading {
+#syxvjwkurc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -684,15 +692,15 @@ From the analysis we find that:</p>
   vertical-align: middle;
 }
 
-#idqktronpp .gt_from_md > :first-child {
+#syxvjwkurc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#idqktronpp .gt_from_md > :last-child {
+#syxvjwkurc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#idqktronpp .gt_row {
+#syxvjwkurc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -711,7 +719,7 @@ From the analysis we find that:</p>
   overflow-x: hidden;
 }
 
-#idqktronpp .gt_stub {
+#syxvjwkurc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -723,7 +731,7 @@ From the analysis we find that:</p>
   padding-left: 12px;
 }
 
-#idqktronpp .gt_summary_row {
+#syxvjwkurc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -733,7 +741,7 @@ From the analysis we find that:</p>
   padding-right: 5px;
 }
 
-#idqktronpp .gt_first_summary_row {
+#syxvjwkurc .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -743,7 +751,7 @@ From the analysis we find that:</p>
   border-top-color: #D3D3D3;
 }
 
-#idqktronpp .gt_grand_summary_row {
+#syxvjwkurc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -753,7 +761,7 @@ From the analysis we find that:</p>
   padding-right: 5px;
 }
 
-#idqktronpp .gt_first_grand_summary_row {
+#syxvjwkurc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -763,11 +771,11 @@ From the analysis we find that:</p>
   border-top-color: #D3D3D3;
 }
 
-#idqktronpp .gt_striped {
+#syxvjwkurc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#idqktronpp .gt_table_body {
+#syxvjwkurc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -776,7 +784,7 @@ From the analysis we find that:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#idqktronpp .gt_footnotes {
+#syxvjwkurc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -790,13 +798,13 @@ From the analysis we find that:</p>
   border-right-color: #D3D3D3;
 }
 
-#idqktronpp .gt_footnote {
+#syxvjwkurc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#idqktronpp .gt_sourcenotes {
+#syxvjwkurc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -810,46 +818,46 @@ From the analysis we find that:</p>
   border-right-color: #D3D3D3;
 }
 
-#idqktronpp .gt_sourcenote {
+#syxvjwkurc .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#idqktronpp .gt_left {
+#syxvjwkurc .gt_left {
   text-align: left;
 }
 
-#idqktronpp .gt_center {
+#syxvjwkurc .gt_center {
   text-align: center;
 }
 
-#idqktronpp .gt_right {
+#syxvjwkurc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#idqktronpp .gt_font_normal {
+#syxvjwkurc .gt_font_normal {
   font-weight: normal;
 }
 
-#idqktronpp .gt_font_bold {
+#syxvjwkurc .gt_font_bold {
   font-weight: bold;
 }
 
-#idqktronpp .gt_font_italic {
+#syxvjwkurc .gt_font_italic {
   font-style: italic;
 }
 
-#idqktronpp .gt_super {
+#syxvjwkurc .gt_super {
   font-size: 65%;
 }
 
-#idqktronpp .gt_footnote_marks {
+#syxvjwkurc .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="idqktronpp" style="overflow-x:auto;overflow-y:auto;width:110%;height:auto;"><table class="gt_table">
+<div id="syxvjwkurc" style="overflow-x:auto;overflow-y:auto;width:110%;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="4" class="gt_heading gt_title gt_font_normal" style>Summary of Average Weekly Sales</th>
@@ -894,8 +902,8 @@ From the analysis we find that:</p>
 </div>
 <div id="avg-velocity-quantity-sale-units" class="section level2">
 <h2>Avg Velocity Quantity (Sale Units)</h2>
-<p>This summary would seem to indicate that the mean of the weekly velocity amount (average weekly units in sales) were higher for sale groups.</p>
-<p>Using an ANOVA to see if the differences in the group means are statistically significant (resulting p-value of <strong>&lt;0.001</strong>). We would conclude that one or more of the group’s weekly velocity amounts are statistically different.</p>
+<p>When grouping all of the years together by experimental condition (“store_group”), we see that the by-period sales are higher on average when the Loop™ campaign is fully utilized for Brewery A.</p>
+<p>To understand if the differences could be due to random chance, we use an ANOVA to see if the differences in the group means are statistically significant. With a resulting p-value of <strong>&lt;0.001</strong>, we can conclude that the sale amounts are positively impacted by the campaign.</p>
 <div class="row">
 <div class="col-md-8">
 <p><img src="analysis_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /></p>
@@ -905,7 +913,7 @@ From the analysis we find that:</p>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#rsgeyjmayw .gt_table {
+#uahdiiljxp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -930,7 +938,7 @@ From the analysis we find that:</p>
   border-left-color: #D3D3D3;
 }
 
-#rsgeyjmayw .gt_heading {
+#uahdiiljxp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -942,7 +950,7 @@ From the analysis we find that:</p>
   border-right-color: #D3D3D3;
 }
 
-#rsgeyjmayw .gt_title {
+#uahdiiljxp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -952,7 +960,7 @@ From the analysis we find that:</p>
   border-bottom-width: 0;
 }
 
-#rsgeyjmayw .gt_subtitle {
+#uahdiiljxp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -962,13 +970,13 @@ From the analysis we find that:</p>
   border-top-width: 0;
 }
 
-#rsgeyjmayw .gt_bottom_border {
+#uahdiiljxp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rsgeyjmayw .gt_col_headings {
+#uahdiiljxp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -983,7 +991,7 @@ From the analysis we find that:</p>
   border-right-color: #D3D3D3;
 }
 
-#rsgeyjmayw .gt_col_heading {
+#uahdiiljxp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1003,7 +1011,7 @@ From the analysis we find that:</p>
   overflow-x: hidden;
 }
 
-#rsgeyjmayw .gt_column_spanner_outer {
+#uahdiiljxp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1015,15 +1023,15 @@ From the analysis we find that:</p>
   padding-right: 4px;
 }
 
-#rsgeyjmayw .gt_column_spanner_outer:first-child {
+#uahdiiljxp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rsgeyjmayw .gt_column_spanner_outer:last-child {
+#uahdiiljxp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rsgeyjmayw .gt_column_spanner {
+#uahdiiljxp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1035,7 +1043,7 @@ From the analysis we find that:</p>
   width: 100%;
 }
 
-#rsgeyjmayw .gt_group_heading {
+#uahdiiljxp .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1057,7 +1065,7 @@ From the analysis we find that:</p>
   vertical-align: middle;
 }
 
-#rsgeyjmayw .gt_empty_group_heading {
+#uahdiiljxp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1072,15 +1080,15 @@ From the analysis we find that:</p>
   vertical-align: middle;
 }
 
-#rsgeyjmayw .gt_from_md > :first-child {
+#uahdiiljxp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rsgeyjmayw .gt_from_md > :last-child {
+#uahdiiljxp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rsgeyjmayw .gt_row {
+#uahdiiljxp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1099,7 +1107,7 @@ From the analysis we find that:</p>
   overflow-x: hidden;
 }
 
-#rsgeyjmayw .gt_stub {
+#uahdiiljxp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1111,7 +1119,7 @@ From the analysis we find that:</p>
   padding-left: 12px;
 }
 
-#rsgeyjmayw .gt_summary_row {
+#uahdiiljxp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1121,7 +1129,7 @@ From the analysis we find that:</p>
   padding-right: 5px;
 }
 
-#rsgeyjmayw .gt_first_summary_row {
+#uahdiiljxp .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1131,7 +1139,7 @@ From the analysis we find that:</p>
   border-top-color: #D3D3D3;
 }
 
-#rsgeyjmayw .gt_grand_summary_row {
+#uahdiiljxp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1141,7 +1149,7 @@ From the analysis we find that:</p>
   padding-right: 5px;
 }
 
-#rsgeyjmayw .gt_first_grand_summary_row {
+#uahdiiljxp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1151,11 +1159,11 @@ From the analysis we find that:</p>
   border-top-color: #D3D3D3;
 }
 
-#rsgeyjmayw .gt_striped {
+#uahdiiljxp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rsgeyjmayw .gt_table_body {
+#uahdiiljxp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1164,7 +1172,7 @@ From the analysis we find that:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#rsgeyjmayw .gt_footnotes {
+#uahdiiljxp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1178,13 +1186,13 @@ From the analysis we find that:</p>
   border-right-color: #D3D3D3;
 }
 
-#rsgeyjmayw .gt_footnote {
+#uahdiiljxp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#rsgeyjmayw .gt_sourcenotes {
+#uahdiiljxp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1198,46 +1206,46 @@ From the analysis we find that:</p>
   border-right-color: #D3D3D3;
 }
 
-#rsgeyjmayw .gt_sourcenote {
+#uahdiiljxp .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#rsgeyjmayw .gt_left {
+#uahdiiljxp .gt_left {
   text-align: left;
 }
 
-#rsgeyjmayw .gt_center {
+#uahdiiljxp .gt_center {
   text-align: center;
 }
 
-#rsgeyjmayw .gt_right {
+#uahdiiljxp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rsgeyjmayw .gt_font_normal {
+#uahdiiljxp .gt_font_normal {
   font-weight: normal;
 }
 
-#rsgeyjmayw .gt_font_bold {
+#uahdiiljxp .gt_font_bold {
   font-weight: bold;
 }
 
-#rsgeyjmayw .gt_font_italic {
+#uahdiiljxp .gt_font_italic {
   font-style: italic;
 }
 
-#rsgeyjmayw .gt_super {
+#uahdiiljxp .gt_super {
   font-size: 65%;
 }
 
-#rsgeyjmayw .gt_footnote_marks {
+#uahdiiljxp .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="rsgeyjmayw" style="overflow-x:auto;overflow-y:auto;width:110%;height:auto;"><table class="gt_table">
+<div id="uahdiiljxp" style="overflow-x:auto;overflow-y:auto;width:110%;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="4" class="gt_heading gt_title gt_font_normal" style>Summary of Weekly Units</th>
@@ -1280,11 +1288,11 @@ From the analysis we find that:</p>
 </div>
 </div>
 </div>
-</div>
-<div id="controlling-by-year" class="section level1">
-<h1>Controlling by Year</h1>
-<div id="differences-by-condition" class="section level2">
-<h2>Differences by condition</h2>
+<div id="avg-sale-dollars-by-year" class="section level2">
+<h2>Avg Sale Dollars By Year</h2>
+<p>Below we have two different views of the trends over time</p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 

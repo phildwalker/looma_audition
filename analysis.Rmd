@@ -52,6 +52,7 @@ __Goal:__
 We want to know the impact the Loop™ campaign had on sales. By comparing the different groups we would like to learn a few different things:  
 
 * Is there an impact of the "Brewery A" Loop™ Campaign on sales?
+    * If we see that the "program_test" condition has increased sales as compared to both the baseline and the "film_control" condition we can be confident that it was Brewery A's film that had the affect on sales and not just the slick Loop™ campaign ipad with the other videos.
 * If so what is the impact? (Sales amount vs sales dollars)
 
  
@@ -112,10 +113,14 @@ pval <- dat %>%
 ```
 
 
-When grouping all of the years together by experimental condition ("store_group")
+When grouping all of the years together by experimental condition ("store_group"), we see that the by-period sales are higher on average when the Loop™ campaign is fully utilized for Brewery A.
 
+To understand if the differences could be due to random chance, we use an ANOVA to see if the differences in the group means are statistically significant. With a resulting p-value of __`r pval$pval`__, we can conclude that the sale dollars are positively impacted by the campaign.
 
-Using an ANOVA to see if the differences in the group means are statistically significant (resulting p-value of __`r pval$pval`__). We would conclude that one or more of the group's weekly velocity amounts are statistically different.
+The visual below helps us to understand of the nature of the sale distribution varies for the different conditions.  
+
+* For example we see the widest part of the baseline group is around `$30-40` indicating that the majority of the sales occur in that range (though sometimes sales exceed $200).
+* In contrast the widest part of the "program_test" group is above `$50`, indicating that a high degree of the average weekly Brewery A sales in stores with the Loop™ are frequently higher than the baseline stores.
 
 <div class = "row">
 <div class = "col-md-8">
@@ -134,9 +139,9 @@ dat %>%
     geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)+
     labs(title = "Comparison of Weekly Velocity Amount ($ Sales) by Store Group (Condition)",
          subtitle = "Points represent average weekly sales per promo period",
-         caption = "Black point represent the groups average ",
+         caption = "Black point represent the groups average",
          x= NULL, y= "Average Weekly Sales")+
-    scale_y_continuous(labels = scales::dollar)+
+    scale_y_continuous(labels = scales::dollar, breaks = seq(0,300, 50))+
     scale_fill_pdw()+
     scale_color_pdw()+
     looma_theme()+
@@ -194,10 +199,9 @@ pval <- dat %>%
 
 
 
-This summary would seem to indicate that the mean of the weekly velocity amount (average weekly units in sales) were higher for sale groups.
+When grouping all of the years together by experimental condition ("store_group"), we see that the by-period sales are higher on average when the Loop™ campaign is fully utilized for Brewery A.
 
-
-Using an ANOVA to see if the differences in the group means are statistically significant (resulting p-value of __`r pval$pval`__). We would conclude that one or more of the group's weekly velocity amounts are statistically different.
+To understand if the differences could be due to random chance, we use an ANOVA to see if the differences in the group means are statistically significant. With a resulting p-value of __`r pval$pval`__, we can conclude that the sale amounts are positively impacted by the campaign. 
 
 <div class = "row">
 <div class = "col-md-8">
@@ -217,6 +221,7 @@ dat %>%
     geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)+
     labs(title = "Comparison of Weekly Velocity Quantity by Store Group",
          subtitle = "Points represent average weekly sales per promo period",
+         caption = "Black point represent the groups average",
          x = NULL, y= "Weekly Sales")+
     scale_fill_pdw()+
     scale_color_pdw()+
@@ -254,13 +259,59 @@ summary %>%
 </div>
 
 
+## Avg Sale Dollars By Year
+
+Below we have two different views of the trends over time
+
+```{r, out.width="100%", fig.width=12}
+summary <- dat %>% 
+  mutate(period_year = as.factor(period_year)) %>% 
+  group_by(store_group, period_year) %>% 
+  summarise(avg_amnt = mean(weekly_velocity_quantity),
+            n = n(),
+            std_amnt = sd(weekly_velocity_quantity))
+
+dat %>% 
+  mutate(period_year = as.factor(period_year)) %>% 
+  ggplot(aes(period_year, weekly_velocity_quantity, fill = period_year, color = period_year))+
+    geom_jitter(size = 0.5, width = .3)+
+    geom_violin(alpha=0.7)+
+    geom_point(data = summary, aes(period_year, avg_amnt), color= "black", size = 2.5)+
+    labs(title = "Average Weekly Sales by Store Group and Year")+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    looma_theme()+
+    facet_wrap(store_group ~ ., ncol =3)+
+    # theme(strip.background = element_rect(color = "grey"))+
+    NULL
+
+```
 
 
+```{r, out.width="100%", fig.width=12}
+dat %>% 
+  mutate(date_us_week = as.Date(paste(period_year, period_num * 4, 1), format = "%Y %U %u")) %>% 
+  group_by(date_us_week,period_year, store_group ) %>% 
+  summarize(avg_amnt = mean(weekly_velocity_quantity),
+            avg_dol = mean(weekly_velocity_amount),
+            sd_dol = sd(weekly_velocity_amount)) %>% 
+  ggplot(aes(date_us_week, avg_dol, color = store_group, group = store_group))+
+    geom_line(size = 1.2, color = "grey")+
+    geom_point(size = 2)+
+    geom_errorbar(aes(ymin = avg_dol - sd_dol, ymax = avg_dol + sd_dol), width = 9, position = "dodge")+
+    labs(title = "Avg Weekly Dollars For Store Group Over Time",
+         subtitle = "Points representing the mean for all stores || Error bars showing +/- 1SD for that period ",
+         caption = "Assuming that periods are distributed equally throughout the year to convert to dates",
+         x = NULL, y=NULL, color = NULL)+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    scale_y_continuous(labels = scales::dollar, breaks = seq(0,300, 25))+
+    scale_x_date(date_breaks = "1 months")+
+    looma_theme()+
+    facet_wrap(period_year ~ ., ncol =3, scales = "free_x")+
+    theme(axis.text.x = element_text(angle = 60))+
+    NULL
+
+```
 
 
-
-
-
-# Controlling by Year 
-
-## Differences by condition
