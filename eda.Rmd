@@ -252,7 +252,7 @@ p_value
 ```
 
 
-# Investigatings Effect {.tabset .tabset-pills}
+# Investigating Effect {.tabset .tabset-pills}
 
 ## By Group and by Year 
 
@@ -297,7 +297,7 @@ dat %>%
 ```
 
 
-## Linear model for yr + group
+## Linear model for yr + group (Amount)
 
 ```{r}
 lm_dat <- dat %>% 
@@ -309,6 +309,82 @@ lm.model <- lm(data = lm_dat,
 summary(lm.model)
 
 summary(aov(lm.model))
+
+```
+
+## Tukey HSD (Amount)
+
+* There doesn't seem to be a significant difference for any group in 2018
+* Program_test is an improvement of 1 for 2019 as compared to the baseline
+* Program_test is an improvement of 1.2 for 2020
+
+
+```{r}
+HSD <- TukeyHSD(aov(lm.model))$`period_year:store_group`
+
+as.data.frame(HSD) %>% 
+  rownames_to_column("Comparison") %>% 
+  mutate(GroupComp = Comparison) %>% 
+  separate(GroupComp, sep = "-", into = c("first", "second")) %>% 
+  separate(first, sep = ":", into = c("year_1", "cond_1")) %>% 
+  separate(second, sep = ":", into = c("year_2", "cond_2")) %>% 
+  filter(year_1 == year_2) %>% 
+  arrange(year_1) %>% 
+  select(-year_1, -cond_1, -year_2, -cond_2) %>% 
+  gt() %>% 
+  fmt_number(columns = 2:4, decimals = 3) %>% 
+  fmt_number(columns = 5, decimals = 5) %>% 
+    tab_style(
+    style = cell_fill(color = "lightgreen"),
+    locations = cells_body(
+      rows = `p adj` < 0.05)
+  ) 
+
+```
+
+
+## Linear model for yr + group (Dollar)
+
+```{r}
+lm_dat <- dat %>% 
+  mutate(period_year = as.character(period_year))
+
+lm.model <- lm(data = lm_dat, 
+               formula = weekly_velocity_amount ~ 0 + period_year*store_group)
+
+summary(lm.model)
+
+summary(aov(lm.model))
+
+```
+
+## Tukey HSD (Dollar)
+
+* There doesn't seem to be a significant difference for any group in 2018
+* Program_test is an improvement of 1 for 2019 as compared to the baseline
+* Program_test is an improvement of 1.2 for 2020
+
+
+```{r}
+HSD <- TukeyHSD(aov(lm.model))$`period_year:store_group`
+
+as.data.frame(HSD) %>% 
+  rownames_to_column("Comparison") %>% 
+  mutate(GroupComp = Comparison) %>% 
+  separate(GroupComp, sep = "-", into = c("first", "second")) %>% 
+  separate(first, sep = ":", into = c("year_1", "cond_1")) %>% 
+  separate(second, sep = ":", into = c("year_2", "cond_2")) %>% 
+  filter(year_1 == year_2) %>% 
+  arrange(year_1) %>% 
+  select(-year_1, -cond_1, -year_2, -cond_2) %>% 
+  gt() %>% 
+  fmt_number(columns = 2:4, decimals = 3) %>% 
+  fmt_number(columns = 5, decimals = 5) %>% 
+    tab_style(
+    style = cell_fill(color = "lightgreen"),
+    locations = cells_body(
+      rows = `p adj` < 0.05)
+  ) 
 
 ```
 
@@ -372,6 +448,37 @@ dat %>%
 ```
 
 
+## Average Sales Amount by Period
+
+2018... maybe just had some interest from the "innovation"  
+2019 is interesting, and would follow my bias the most with the film_control and program_test following similar trends at different magnitudes.
+2020 is odd, where it seems to be having an entirely different pattern than expected, with average sale dollars spiking up for the second half of the year in the "program_test" condition. 
+
+
+```{r}
+dat %>% 
+  mutate(date_us_week = as.Date(paste(period_year, period_num * 4, 1), format = "%Y %U %u")) %>% 
+  # mutate(period_year = as.factor(period_year)) %>% 
+  group_by(date_us_week,period_year, store_group ) %>% 
+  summarize(avg_amnt = mean(weekly_velocity_quantity),
+            sd_amnt = sd(weekly_velocity_quantity),
+            avg_dol = mean(weekly_velocity_amount),
+            sd_dol = sd(weekly_velocity_amount)) %>% 
+  ggplot(aes(date_us_week, avg_amnt, color = store_group))+
+    geom_line(size = 1.2)+
+    geom_point(size = 1.5)+
+    geom_errorbar(aes(ymin = avg_amnt - sd_amnt, ymax = avg_amnt + sd_amnt), width = 9, position = "dodge")+
+    labs(title = "Avg Weekly Sales Amount For Store Group Over Time")+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    scale_x_date(date_breaks = "1 months")+
+    looma_theme()+
+    facet_wrap(period_year ~ ., ncol =3, scales = "free_x")+
+    theme(axis.text.x = element_text(angle = 60))+
+    NULL
+
+
+```
 
 ## Is there a potential store dependency?
 
