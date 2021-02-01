@@ -51,9 +51,9 @@ __Goal:__
 
 We want to know the impact the Loop™ campaign had on sales. By comparing the different groups we would like to learn a few different things:  
 
-* Does the Loop campaign affect store sales (Program Test & Film Control vs Baseline)  
-* What is the impact of the Loop Campaign of Brewery A on sales
- 
+* Is there an impact of the "Brewery A" Loop™ Campaign on sales?
+* If so what is the impact? (Sales amount vs sales dollars)
+
  
 ## Assumptions 
 
@@ -63,14 +63,11 @@ _(Note: this section would likely take a different shape as familiarity with the
 With this analysis we are assuming that: 
 
 * The type/size of stores are similar for the across the 3 groups. (ie if the groups were stratified by size then the resulting sales could be more a factor of store size and less the campaign)
-* The potential time of year impact is captured across the 3 groups (ie if beer/wine is most popular during Thanksgiving, that the store groups capture that time period similarly across groups)
-* The store regions are similar (ie the campaign might not be relevant to certain communities) 
+* The store regions are similar enough (ie the campaign might not be relevant to certain communities or the communities could be in different SES leading to different reactions to the pandemic). 
+* The potential time of year impact is captured similarly across the 3 groups (ie if beer/wine is most popular during Thanksgiving/ 4th of July, that the store groups capture that time period similarly across groups).
+* The beers made available by Brewery A were consistent across stores, and were placed in a relatively similar proximity to the Loop™/ were accessible to the customer.
 
-Potential Investigation Next Steps:  
 
-* It would be interesting in future iterations, to get a more detailed view of what is being purchased. This could potentially help to understand where the campaign leads to the purchase of (perceived) similar products. 
-* Depending on who the customer is, we might want to calculate the ROI of the Loop™ campaign 
-* It would be interesting figure out the "0's" (ie getting total people who when to the store but didn't buy)
  
 ## Results
 
@@ -80,12 +77,17 @@ From the analysis we find that:
 1. Overall the Loop™ campaign looks to had a positive impact on Brewery A's sales.  
 1. The sales increased year over year for all groups.  
     * This could mean that the brand awareness for the Brewery has generally increased over time.
-    * Could be a Covid affect (more people trying beer)
+    * Could be a Covid affect (more people trying beer) or that there were more options made available to customers over time.
 1. The program test both show an increase in the mean sales (both amount and dollars) as compared to the baseline and the film control.  
-    * For this sample, it looks like it __increases sales of ~$15__ (just over 1 additional unit) on average as compared to the baseline  
+    * For this sample, it looks like it __increased Brewery A sales on average by ~$15__ (roughly 1 additional unit) on average as compared to the baseline  
 
 
+__Potential Investigation Next Steps:__ 
 
+* It would be interesting in future iterations, to get a more detailed view of what is being purchased. This could potentially help to understand where the campaign leads to the purchase of (perceived) similar products. 
+* Depending on who the customer is, we might want to calculate the ROI of the Loop™ campaign 
+* It would be interesting figure out the "0's" (ie getting total people who went to the store but didn't buy that beer, helping to understand if they bought different beer/wine).
+* With the variations in sales amount vs dollars it would be interesting to get increase visibility to other potential confounding affects (ie sales).
 
 </div>
 
