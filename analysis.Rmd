@@ -78,8 +78,8 @@ From the analysis we find that:
 1. The sales increased year over year for all groups.  
     * This could mean that the brand awareness for the Brewery has generally increased over time.
     * Could be a Covid affect (more people trying beer) or that there were more options made available to customers over time.
-1. The program test both show an increase in the mean sales (both amount and dollars) as compared to the baseline and the film control.  
-    * For this sample, it looks like it __increased Brewery A sales on average by ~$15__ (roughly 1 additional unit) on average as compared to the baseline  
+1. The "program test" both show an increase in the mean sales (both amount and dollars) as compared to the baseline and the film control.  
+    * For this sample, it looks like the Loop™ campaign __increased Brewery A sales on average by ~$15__ (roughly 1 additional unit) on average as compared to the baseline  
 
 
 __Potential Investigation Next Steps:__ 
@@ -112,7 +112,7 @@ pval <- dat %>%
 ```
 
 
-This summary would seem to indicate that the mean of the weekly velocity amount (average weekly dollars in sales) were higher for s
+When grouping all of the years together by experimental condition ("store_group")
 
 
 Using an ANOVA to see if the differences in the group means are statistically significant (resulting p-value of __`r pval$pval`__). We would conclude that one or more of the group's weekly velocity amounts are statistically different.

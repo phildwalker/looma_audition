@@ -390,13 +390,6 @@ as.data.frame(HSD) %>%
 
 
 
-## Trends over time
-
-```{r}
-dat <-
-  dat %>% 
-  mutate(period_yr_num = as.numeric(paste0(as.character(period_year), ".", as.character(period_num))))
-```
 
 
 ### Are stores represented evenly across the time period?
@@ -412,18 +405,40 @@ dat %>%
 ```
 
 
+After the 9th period of 2018 it looks like the percent of non-baseline stores is fairly consistent.
+
+```{r}
+dat %>% 
+  mutate(date_us_week = as.Date(paste(period_year, period_num * 4, 1), format = "%Y %U %u")) %>% 
+  count(store_group, date_us_week, period_year, period_num) %>% 
+  ggplot(aes(period_num, n, fill = store_group))+
+    geom_bar(stat = "identity", position = "fill")+
+    scale_y_continuous(labels = scales::percent)+
+    # scale_x_date(date_breaks = "1 months")+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    looma_theme()+
+    labs(title = "Percent of Stores within each condition by period")+
+    facet_wrap(period_year ~ ., ncol =3)+
+    # theme(axis.text.x = element_text(angle = 60))+
+    NULL
+
+```
 
 
 
 
-## Average Sales Dollars by Period
+
+## Average Sales by Period
+
+__Average Sales Dollars by Period__
 
 2018... maybe just had some interest from the "innovation"  
 2019 is interesting, and would follow my bias the most with the film_control and program_test following similar trends at different magnitudes.
 2020 is odd, where it seems to be having an entirely different pattern than expected, with average sale dollars spiking up for the second half of the year in the "program_test" condition. 
 
 
-```{r}
+```{r, out.width="100%", fig.width=12}
 dat %>% 
   mutate(date_us_week = as.Date(paste(period_year, period_num * 4, 1), format = "%Y %U %u")) %>% 
   # mutate(period_year = as.factor(period_year)) %>% 
@@ -448,14 +463,10 @@ dat %>%
 ```
 
 
-## Average Sales Amount by Period
-
-2018... maybe just had some interest from the "innovation"  
-2019 is interesting, and would follow my bias the most with the film_control and program_test following similar trends at different magnitudes.
-2020 is odd, where it seems to be having an entirely different pattern than expected, with average sale dollars spiking up for the second half of the year in the "program_test" condition. 
+__Average Sales Amount by Period__
 
 
-```{r}
+```{r, out.width="100%", fig.width=12}
 dat %>% 
   mutate(date_us_week = as.Date(paste(period_year, period_num * 4, 1), format = "%Y %U %u")) %>% 
   # mutate(period_year = as.factor(period_year)) %>% 
@@ -477,6 +488,28 @@ dat %>%
     theme(axis.text.x = element_text(angle = 60))+
     NULL
 
+
+```
+
+
+## Experiment Review
+Comment in the prompt: "The experiment was run during period number 11 of 2020"
+
+... I think this means that that's when the data was pulled for investigation (because there isn't any data after this time period)... Though it's possible that period 11 for 2020 wasn't complete...
+
+```{r}
+sumWeek <- dat %>% 
+  mutate(date_us_week = as.Date(paste(period_year, period_num * 4, 1), format = "%Y %U %u")) %>% 
+  # mutate(period_year = as.factor(period_year)) %>% 
+  mutate(ExperimentPer = ifelse(period_year == 2020 & period_num == 11, 1, 0)) %>% 
+  group_by(date_us_week,period_year,period_num, store_group, ExperimentPer ) %>% 
+  summarize(avg_amnt = mean(weekly_velocity_quantity),
+            sd_amnt = sd(weekly_velocity_quantity),
+            avg_dol = mean(weekly_velocity_amount),
+            sd_dol = sd(weekly_velocity_amount))
+
+sumWeek %>% filter(ExperimentPer == 1)
+  
 
 ```
 
