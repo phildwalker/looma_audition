@@ -35,6 +35,8 @@ looma_theme <- function () {
         size = 14),                #font size
       
       axis.text.x = element_text(            #margin for axis text
-        margin=margin(5, b = 10))
+        margin=margin(5, b = 10)),
+      
+      strip.text = element_text(family = font, size = 14)
     )
 }

@@ -56,18 +56,6 @@ We want to know the impact the Loop™ campaign had on sales. By comparing the d
 * If so what is the impact? (Sales amount vs sales dollars)
 
  
-## Assumptions 
-
-__Assumptions:__
-_(Note: this section would likely take a different shape as familiarity with the data source increase/ relationship with the customer develops)_ 
-
-With this analysis we are assuming that: 
-
-* The type/size of stores are similar for the across the 3 groups. (ie if the groups were stratified by size then the resulting sales could be more a factor of store size and less the campaign)
-* The store regions are similar enough (ie the campaign might not be relevant to certain communities or the communities could be in different SES leading to different reactions to the pandemic). 
-* The potential time of year impact is captured similarly across the 3 groups (ie if beer/wine is most popular during Thanksgiving/ 4th of July, that the store groups capture that time period similarly across groups).
-* The beers made available by Brewery A were consistent across stores, and were placed in a relatively similar proximity to the Loop™/ were accessible to the customer.
-
 
  
 ## Results
@@ -90,7 +78,22 @@ __Potential Investigation Next Steps:__
 * It would be interesting figure out the "0's" (ie getting total people who went to the store but didn't buy that beer, helping to understand if they bought different beer/wine).
 * With the variations in sales amount vs dollars it would be interesting to get increase visibility to other potential confounding affects (ie sales).
 
+
+## Assumptions 
+
+__Assumptions:__
+_(Note: this section would likely take a different shape as familiarity with the data source increase/ relationship with the customer develops)_ 
+
+With this analysis we are assuming that: 
+
+* The type/size of stores are similar for the across the 3 groups. (ie if the groups were stratified by size then the resulting sales could be more a factor of store size and less the campaign)
+* The store regions are similar enough (ie the campaign might not be relevant to certain communities or the communities could be in different SES leading to different reactions to the pandemic). 
+* The potential time of year impact is captured similarly across the 3 groups (ie if beer/wine is most popular during Thanksgiving/ 4th of July, that the store groups capture that time period similarly across groups).
+* The beers made available by Brewery A were consistent across stores, and were placed in a relatively similar proximity to the Loop™/ were accessible to the customer.
+
+
 </div>
+
 
 
 # Summary of Impact {.tabset .tabset-pills}
@@ -258,10 +261,18 @@ summary %>%
 </div>
 </div>
 
+# Next Steps: Sales Over Time
 
-## Avg Sale Dollars By Year
+Below we have two different views of the trends over time to help us as we investigate potential next steps
 
-Below we have two different views of the trends over time
+__By Year__
+
+From this view, we can see that within each condition (Store Group) that the average of sales are increasing Year over Year.  
+
+* We can see how 2020 produces the highest fliers for baseline group, where in more than a couple instances there are above 10 units on average sold per week. 
+    * These cases likely represent opportunities for us perform a deep time to understand if there are potential best practices/ lessons we could learn from those high volume stores.
+    * The high average weekly sales in 2020 across the baseline and program stores could also indicate how the Covid pandemic is impact customer choices, but this impact would likely not be understood until we have post pandemic sales data to compare to.
+
 
 ```{r, out.width="100%", fig.width=12}
 summary <- dat %>% 
@@ -277,15 +288,27 @@ dat %>%
     geom_jitter(size = 0.5, width = .3)+
     geom_violin(alpha=0.7)+
     geom_point(data = summary, aes(period_year, avg_amnt), color= "black", size = 2.5)+
-    labs(title = "Average Weekly Sales by Store Group and Year")+
+    labs(title = "Average Weekly Sales Units by Store Group and Year",
+         subtitle = "Points represent average weekly sales per promo period",
+         caption = "Black point represent the groups average",
+         x= NULL, y= NULL)+
     scale_fill_pdw()+
     scale_color_pdw()+
     looma_theme()+
     facet_wrap(store_group ~ ., ncol =3)+
-    # theme(strip.background = element_rect(color = "grey"))+
+    theme(legend.position = "none")+
     NULL
 
 ```
+
+
+__By Period__
+
+The chart below is designed to help foster discussion around the potential seasonality impacts on sales dollars (where amounts show a similar pattern).
+
+* It seems like the seasonality patterns of 2018 and 2019 where there general peaks in the summer/ holiday seasons were completely discarded during 2020. As mentioned above, this could very much be a Covid related effect and it will be interesting to see if the prior seasonality returns in 2021/2020.
+  * If the seasonality returns, it would be interesting to learn more from Brewery A + Store leaders to understand if that corresponds to new releases and/or generally known customer behavior.   
+
 
 
 ```{r, out.width="100%", fig.width=12}
@@ -301,7 +324,7 @@ dat %>%
     geom_errorbar(aes(ymin = avg_dol - sd_dol, ymax = avg_dol + sd_dol), width = 9, position = "dodge")+
     labs(title = "Avg Weekly Dollars For Store Group Over Time",
          subtitle = "Points representing the mean for all stores || Error bars showing +/- 1SD for that period ",
-         caption = "Assuming that periods are distributed equally throughout the year to convert to dates",
+         caption = "Assuming that periods are distributed equally throughout the year to convert to estimated dates",
          x = NULL, y=NULL, color = NULL)+
     scale_fill_pdw()+
     scale_color_pdw()+
