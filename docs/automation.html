@@ -369,7 +369,7 @@ $(document).ready(function () {
 </div>
 <div id="considersations" class="section level1">
 <h1>Considersations</h1>
-<p>In prior roles when the discussion of some degree of scaling up/ “productionizing” an analysis I have found the highest degree of success when I understand customer goals. Though sometimes expressed as wanting “everything yesterday”, I’ve found that the heart of the ask falls in which of the two potential paths: “Increasing the Speed” or “Expanding the Scope” (though often that ask falls in a degree of both).</p>
+<p>In prior roles, when the discussion of scaling up/ “productionizing” an analysis I have found the highest degree of success after better understanding the customer’s goals. Though sometimes expressed as wanting “everything yesterday”, I’ve found that the heart of the ask falls in one of the two potential paths: “Increasing the Speed” or “Expanding the Scope” (though often that ask falls in a degree of both).</p>
 <p>Foundational to both of the potential paths above is understanding the fidelity of the data source(s)/ data pipeline. If there is low confidence in the data source, there is probably going to need to be a fair amount of work with the customer to either stabilize the data generation/sharing process or in the alignment of customer expectations with the data reality (the GIGO conversation).</p>
 <p>Finally if there is a degree of stability in both the input and output expectations, to help improve the code sharability/ development cycle I would look to ensure we were using functions + internal packages where possible to help produce consistent outputs.</p>
 <p><br></p>
@@ -379,8 +379,8 @@ $(document).ready(function () {
 <ol style="list-style-type: decimal">
 <li>Deploying shiny app where the customer has access to a fairly standardized consistent output with updated data sources when that data becomes available.
 <ul>
-<li><strong>Benefits:</strong> Fastest</li>
-<li><strong>Drawbacks:</strong> Most robust if desired output + incoming data source is consistent<br />
+<li><strong>Benefits:</strong> Fastest for the customer to get an answer (or improve the questions they might be asking).</li>
+<li><strong>Drawbacks:</strong> Depends on desired output + incoming data source being consistent<br />
 </li>
 </ul></li>
 <li>On-demand report via parameterized reporting
@@ -390,7 +390,7 @@ $(document).ready(function () {
 <li><strong>Drawbacks:</strong> This framework would likely depend on having RStudio Connect deployed (and $ invested)/ would likely not be used for external customers<br />
 </li>
 </ul></li>
-<li>Setting up an “analyst in the loop” with scheduled jobs. Would want to consider infrastructure used.. using windows or linux (scheduler vs cron job), which would likely kick off a makefile/ setting up github actions. The reports would then output locally (send email when complete to alert),and would then be available for internal review/ revision/ further investigation before sharing with customer.
+<li>Setting up an “analyst in the loop” with scheduled jobs. Would want to determine infrastructure used, like if the team uses windows or linux (scheduler vs cron job), which would then kick off a makefile/ github actions. The reports would then output locally (probably including an email when complete to alert), and would then be available for internal review/ revision/ further investigation before sharing with customer.
 <ul>
 <li><strong>Benefits:</strong> Allows for adjusting to shifting demands/ inconsistent data sources before exposing variability to customer.</li>
 <li><strong>Drawbacks:</strong> Slower feedback cycle to customer than other options above (though faster than doing manually).</li>
@@ -399,10 +399,10 @@ $(document).ready(function () {
 </div>
 <div id="expanding-scope" class="section level2">
 <h2>Expanding Scope</h2>
-<p>This path of work has the potential to greatly shift nature of the work (ie considerations around likely scope creep). In the conversation with the customer, I would look for a couple different themes in helping to determine the potential scope of work.</p>
+<p>This path of work has the potential to greatly shift the nature of the work (ie considerations around likely scope creep). In the conversation with the customer, I would look for a couple different themes in helping to determine the potential scope of work.</p>
 <p><strong>Potential Themes</strong></p>
 <ol style="list-style-type: decimal">
-<li>More Store data:
+<li>More store data:
 <ul>
 <li>This could be a really easy change if the data source isn’t changing, and we are essentially getting more data. In this case, I would validate that the data and analysis pipeline doesn’t have inadvertent hard-coded selections (ie only looking for specific store ids, etc) and if not, than ideally would be able to refresh with minimal additional work.<br />
 </li>

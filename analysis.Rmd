@@ -263,7 +263,9 @@ summary %>%
 
 # Next Steps: Sales Over Time
 
-Below we have two different views of the trends over time to help us as we investigate potential next steps
+Below we have two different views ("By Year" and "By Period") of the trends over time to help us as we investigate potential next steps.
+
+<br>
 
 __By Year__
 
