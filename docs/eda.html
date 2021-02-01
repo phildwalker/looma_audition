@@ -453,7 +453,7 @@ div.tocify {
 
 <div id="goal" class="section level1">
 <h1>Goal</h1>
-<p>To help show my process for:</p>
+<p>This section is meant to help show my general process around:</p>
 <ul>
 <li>ingesting the dataset<br />
 </li>
@@ -461,6 +461,8 @@ div.tocify {
 </li>
 <li>developing the cleaned views</li>
 </ul>
+<p>I am intentionally not spending a ton of time working to clean up the visuals or extensively documenting the results, but I have enable the “show code” functionality as part of the yaml header for this rmd file (eda.Rmd).</p>
+<p>If desired the entirity of the website can be found on github [<a href="https://github.com/phildwalker/looma_audition" class="uri">https://github.com/phildwalker/looma_audition</a>]</p>
 </div>
 <div id="read-in-data" class="section level1 tabset tabset-pills">
 <h1 class="tabset tabset-pills">Read In Data</h1>
@@ -512,6 +514,7 @@ colnames &lt;- colnames(dat)</code></pre>
 <h1 class="tabset tabset-pills">First Pass Review</h1>
 <div id="distributions-of-data" class="section level2">
 <h2>Distributions of Data</h2>
+<p>Using purrr to run through the distribution of each variable by store group (as we know that is the main indicator for this analysis).</p>
 <pre class="r"><code>reviewCol &lt;- 
   purrr::map(colnames,
              ~ dat %&gt;% ggplot(aes_string(.x, fill=&quot;store_group&quot;))+
@@ -522,28 +525,30 @@ colnames &lt;- colnames(dat)</code></pre>
                # theme(plot.title = element_text(size = 15))
 )
 
-# reviewCol[[2]] #this is &quot;iter 1&quot;
-reviewCol</code></pre>
-<pre><code>## [[1]]</code></pre>
+# reviewCol
+
+reviewCol[[1]]</code></pre>
 <p><img src="eda_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre><code>## 
-## [[2]]</code></pre>
+<pre class="r"><code>reviewCol[[2]] + geom_bar(width = 0.0001, alpha = 0.4, color= &quot;black&quot;)+ facet_wrap(store_group ~. , ncol =  1)</code></pre>
 <p><img src="eda_files/figure-html/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
-<pre><code>## 
-## [[3]]</code></pre>
+<pre class="r"><code># the store distribution seems similar for 2019 and 2020
+reviewCol[[2]] + geom_bar(width = 0.0001, alpha = 0.4, color= &quot;black&quot;)+ facet_grid(store_group ~factor(period_year))</code></pre>
 <p><img src="eda_files/figure-html/unnamed-chunk-4-3.png" width="672" style="display: block; margin: auto;" /></p>
-<pre><code>## 
-## [[4]]</code></pre>
+<pre class="r"><code>reviewCol[[3]]</code></pre>
 <p><img src="eda_files/figure-html/unnamed-chunk-4-4.png" width="672" style="display: block; margin: auto;" /></p>
-<pre><code>## 
-## [[5]]</code></pre>
+<pre class="r"><code>reviewCol[[4]]</code></pre>
 <p><img src="eda_files/figure-html/unnamed-chunk-4-5.png" width="672" style="display: block; margin: auto;" /></p>
-<pre><code>## 
-## [[6]]</code></pre>
+<pre class="r"><code>reviewCol[[4]] + facet_wrap(factor(period_year) ~ ., ncol = 3)</code></pre>
 <p><img src="eda_files/figure-html/unnamed-chunk-4-6.png" width="672" style="display: block; margin: auto;" /></p>
-<pre><code>## 
-## [[7]]</code></pre>
+<pre class="r"><code>reviewCol[[5]]</code></pre>
 <p><img src="eda_files/figure-html/unnamed-chunk-4-7.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># no zero sales... which makes sense, but it means the data is naturally censored
+reviewCol[[6]] + geom_bar(width = 4)</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-4-8.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>reviewCol[[6]] + geom_bar(width = 4)+ facet_wrap(factor(period_year) ~ ., ncol = 3)</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-4-9.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>reviewCol[[7]]</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-4-10.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="avg-velocity-amount" class="section level2">
 <h2>Avg Velocity Amount</h2>
@@ -571,7 +576,7 @@ dat %&gt;%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qewvxknyav .gt_table {
+#ssvfxmkrei .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -596,7 +601,7 @@ dat %&gt;%
   border-left-color: #D3D3D3;
 }
 
-#qewvxknyav .gt_heading {
+#ssvfxmkrei .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -608,7 +613,7 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#qewvxknyav .gt_title {
+#ssvfxmkrei .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -618,7 +623,7 @@ dat %&gt;%
   border-bottom-width: 0;
 }
 
-#qewvxknyav .gt_subtitle {
+#ssvfxmkrei .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -628,13 +633,13 @@ dat %&gt;%
   border-top-width: 0;
 }
 
-#qewvxknyav .gt_bottom_border {
+#ssvfxmkrei .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qewvxknyav .gt_col_headings {
+#ssvfxmkrei .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -649,7 +654,7 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#qewvxknyav .gt_col_heading {
+#ssvfxmkrei .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -669,7 +674,7 @@ dat %&gt;%
   overflow-x: hidden;
 }
 
-#qewvxknyav .gt_column_spanner_outer {
+#ssvfxmkrei .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -681,15 +686,15 @@ dat %&gt;%
   padding-right: 4px;
 }
 
-#qewvxknyav .gt_column_spanner_outer:first-child {
+#ssvfxmkrei .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qewvxknyav .gt_column_spanner_outer:last-child {
+#ssvfxmkrei .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qewvxknyav .gt_column_spanner {
+#ssvfxmkrei .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -701,7 +706,7 @@ dat %&gt;%
   width: 100%;
 }
 
-#qewvxknyav .gt_group_heading {
+#ssvfxmkrei .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -723,7 +728,7 @@ dat %&gt;%
   vertical-align: middle;
 }
 
-#qewvxknyav .gt_empty_group_heading {
+#ssvfxmkrei .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -738,15 +743,15 @@ dat %&gt;%
   vertical-align: middle;
 }
 
-#qewvxknyav .gt_from_md > :first-child {
+#ssvfxmkrei .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qewvxknyav .gt_from_md > :last-child {
+#ssvfxmkrei .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qewvxknyav .gt_row {
+#ssvfxmkrei .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -765,7 +770,7 @@ dat %&gt;%
   overflow-x: hidden;
 }
 
-#qewvxknyav .gt_stub {
+#ssvfxmkrei .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -777,7 +782,7 @@ dat %&gt;%
   padding-left: 12px;
 }
 
-#qewvxknyav .gt_summary_row {
+#ssvfxmkrei .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -787,7 +792,7 @@ dat %&gt;%
   padding-right: 5px;
 }
 
-#qewvxknyav .gt_first_summary_row {
+#ssvfxmkrei .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -797,7 +802,7 @@ dat %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#qewvxknyav .gt_grand_summary_row {
+#ssvfxmkrei .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -807,7 +812,7 @@ dat %&gt;%
   padding-right: 5px;
 }
 
-#qewvxknyav .gt_first_grand_summary_row {
+#ssvfxmkrei .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -817,11 +822,11 @@ dat %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#qewvxknyav .gt_striped {
+#ssvfxmkrei .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qewvxknyav .gt_table_body {
+#ssvfxmkrei .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -830,7 +835,7 @@ dat %&gt;%
   border-bottom-color: #D3D3D3;
 }
 
-#qewvxknyav .gt_footnotes {
+#ssvfxmkrei .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -844,13 +849,13 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#qewvxknyav .gt_footnote {
+#ssvfxmkrei .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#qewvxknyav .gt_sourcenotes {
+#ssvfxmkrei .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -864,46 +869,46 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#qewvxknyav .gt_sourcenote {
+#ssvfxmkrei .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#qewvxknyav .gt_left {
+#ssvfxmkrei .gt_left {
   text-align: left;
 }
 
-#qewvxknyav .gt_center {
+#ssvfxmkrei .gt_center {
   text-align: center;
 }
 
-#qewvxknyav .gt_right {
+#ssvfxmkrei .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qewvxknyav .gt_font_normal {
+#ssvfxmkrei .gt_font_normal {
   font-weight: normal;
 }
 
-#qewvxknyav .gt_font_bold {
+#ssvfxmkrei .gt_font_bold {
   font-weight: bold;
 }
 
-#qewvxknyav .gt_font_italic {
+#ssvfxmkrei .gt_font_italic {
   font-style: italic;
 }
 
-#qewvxknyav .gt_super {
+#ssvfxmkrei .gt_super {
   font-size: 65%;
 }
 
-#qewvxknyav .gt_footnote_marks {
+#ssvfxmkrei .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="qewvxknyav" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="ssvfxmkrei" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -965,7 +970,7 @@ p_value &lt;- null_distribution %&gt;%
 p_value</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["p_value"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.001"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["p_value"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -995,7 +1000,7 @@ dat %&gt;%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#nhorhpjgkk .gt_table {
+#rubpoznmfh .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1020,7 +1025,7 @@ dat %&gt;%
   border-left-color: #D3D3D3;
 }
 
-#nhorhpjgkk .gt_heading {
+#rubpoznmfh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1032,7 +1037,7 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#nhorhpjgkk .gt_title {
+#rubpoznmfh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1042,7 +1047,7 @@ dat %&gt;%
   border-bottom-width: 0;
 }
 
-#nhorhpjgkk .gt_subtitle {
+#rubpoznmfh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1052,13 +1057,13 @@ dat %&gt;%
   border-top-width: 0;
 }
 
-#nhorhpjgkk .gt_bottom_border {
+#rubpoznmfh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nhorhpjgkk .gt_col_headings {
+#rubpoznmfh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1073,7 +1078,7 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#nhorhpjgkk .gt_col_heading {
+#rubpoznmfh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1093,7 +1098,7 @@ dat %&gt;%
   overflow-x: hidden;
 }
 
-#nhorhpjgkk .gt_column_spanner_outer {
+#rubpoznmfh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1105,15 +1110,15 @@ dat %&gt;%
   padding-right: 4px;
 }
 
-#nhorhpjgkk .gt_column_spanner_outer:first-child {
+#rubpoznmfh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nhorhpjgkk .gt_column_spanner_outer:last-child {
+#rubpoznmfh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nhorhpjgkk .gt_column_spanner {
+#rubpoznmfh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1125,7 +1130,7 @@ dat %&gt;%
   width: 100%;
 }
 
-#nhorhpjgkk .gt_group_heading {
+#rubpoznmfh .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1147,7 +1152,7 @@ dat %&gt;%
   vertical-align: middle;
 }
 
-#nhorhpjgkk .gt_empty_group_heading {
+#rubpoznmfh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1162,15 +1167,15 @@ dat %&gt;%
   vertical-align: middle;
 }
 
-#nhorhpjgkk .gt_from_md > :first-child {
+#rubpoznmfh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nhorhpjgkk .gt_from_md > :last-child {
+#rubpoznmfh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nhorhpjgkk .gt_row {
+#rubpoznmfh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1189,7 +1194,7 @@ dat %&gt;%
   overflow-x: hidden;
 }
 
-#nhorhpjgkk .gt_stub {
+#rubpoznmfh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1201,7 +1206,7 @@ dat %&gt;%
   padding-left: 12px;
 }
 
-#nhorhpjgkk .gt_summary_row {
+#rubpoznmfh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1211,7 +1216,7 @@ dat %&gt;%
   padding-right: 5px;
 }
 
-#nhorhpjgkk .gt_first_summary_row {
+#rubpoznmfh .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1221,7 +1226,7 @@ dat %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#nhorhpjgkk .gt_grand_summary_row {
+#rubpoznmfh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1231,7 +1236,7 @@ dat %&gt;%
   padding-right: 5px;
 }
 
-#nhorhpjgkk .gt_first_grand_summary_row {
+#rubpoznmfh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1241,11 +1246,11 @@ dat %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#nhorhpjgkk .gt_striped {
+#rubpoznmfh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nhorhpjgkk .gt_table_body {
+#rubpoznmfh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1254,7 +1259,7 @@ dat %&gt;%
   border-bottom-color: #D3D3D3;
 }
 
-#nhorhpjgkk .gt_footnotes {
+#rubpoznmfh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1268,13 +1273,13 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#nhorhpjgkk .gt_footnote {
+#rubpoznmfh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#nhorhpjgkk .gt_sourcenotes {
+#rubpoznmfh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1288,46 +1293,46 @@ dat %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#nhorhpjgkk .gt_sourcenote {
+#rubpoznmfh .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#nhorhpjgkk .gt_left {
+#rubpoznmfh .gt_left {
   text-align: left;
 }
 
-#nhorhpjgkk .gt_center {
+#rubpoznmfh .gt_center {
   text-align: center;
 }
 
-#nhorhpjgkk .gt_right {
+#rubpoznmfh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nhorhpjgkk .gt_font_normal {
+#rubpoznmfh .gt_font_normal {
   font-weight: normal;
 }
 
-#nhorhpjgkk .gt_font_bold {
+#rubpoznmfh .gt_font_bold {
   font-weight: bold;
 }
 
-#nhorhpjgkk .gt_font_italic {
+#rubpoznmfh .gt_font_italic {
   font-style: italic;
 }
 
-#nhorhpjgkk .gt_super {
+#rubpoznmfh .gt_super {
   font-size: 65%;
 }
 
-#nhorhpjgkk .gt_footnote_marks {
+#rubpoznmfh .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="nhorhpjgkk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="rubpoznmfh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -1394,29 +1399,519 @@ p_value</code></pre>
 </div>
 </div>
 </div>
-<div id="trends-over-time" class="section level1 tabset tabset-pills">
-<h1 class="tabset tabset-pills">Trends over time</h1>
+<div id="investigatings-effect" class="section level1 tabset tabset-pills">
+<h1 class="tabset tabset-pills">Investigatings Effect</h1>
+<div id="by-group-and-by-year" class="section level2">
+<h2>By Group and by Year</h2>
+<p>Visually it looks like across conditions, that the sales are increasing YOY.</p>
+<pre class="r"><code>summary &lt;- dat %&gt;% 
+  mutate(period_year = as.factor(period_year)) %&gt;% 
+  group_by(store_group, period_year) %&gt;% 
+  summarise(avg_amnt = mean(weekly_velocity_quantity),
+            n = n(),
+            std_amnt = sd(weekly_velocity_quantity))
+
+dat %&gt;% 
+  mutate(period_year = as.factor(period_year)) %&gt;% 
+  ggplot(aes(period_year, weekly_velocity_quantity, fill = period_year, color = period_year))+
+    geom_jitter(size = 0.5, width = .3)+
+    geom_violin(alpha=0.7)+
+    geom_point(data = summary, aes(period_year, avg_amnt), color= &quot;black&quot;, size = 2.5)+
+    labs(title = &quot;Comparison of Weekly Velocity Quantity by Store Group&quot;)+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    looma_theme()+
+    facet_wrap(store_group ~ ., ncol =3)</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>It’s interesting that the film control group doesn’t seem to see the same YOY increase for 2019 -&gt; 2020 as the other two conditions.</p>
+<pre class="r"><code>dat %&gt;% 
+  mutate(period_year = as.factor(period_year)) %&gt;% 
+  group_by(store_group, period_year) %&gt;% 
+  summarise(avg_amnt = mean(weekly_velocity_quantity),
+            avg_dol = mean(weekly_velocity_amount)) %&gt;%
+  ungroup() %&gt;% 
+  pivot_wider(names_from = &quot;period_year&quot;, values_from = c(&quot;avg_amnt&quot;, &quot;avg_dol&quot;)) %&gt;% 
+  gt() %&gt;% 
+  fmt_number(columns = 2:7, decimals = 2)</code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#ronttwyiax .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ronttwyiax .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ronttwyiax .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ronttwyiax .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ronttwyiax .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ronttwyiax .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ronttwyiax .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ronttwyiax .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ronttwyiax .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ronttwyiax .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ronttwyiax .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ronttwyiax .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ronttwyiax .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ronttwyiax .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ronttwyiax .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ronttwyiax .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ronttwyiax .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#ronttwyiax .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ronttwyiax .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#ronttwyiax .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ronttwyiax .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ronttwyiax .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ronttwyiax .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ronttwyiax .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ronttwyiax .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ronttwyiax .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ronttwyiax .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#ronttwyiax .gt_left {
+  text-align: left;
+}
+
+#ronttwyiax .gt_center {
+  text-align: center;
+}
+
+#ronttwyiax .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ronttwyiax .gt_font_normal {
+  font-weight: normal;
+}
+
+#ronttwyiax .gt_font_bold {
+  font-weight: bold;
+}
+
+#ronttwyiax .gt_font_italic {
+  font-style: italic;
+}
+
+#ronttwyiax .gt_super {
+  font-size: 65%;
+}
+
+#ronttwyiax .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="ronttwyiax" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">store_group</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">avg_amnt_2018</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">avg_amnt_2019</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">avg_amnt_2020</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">avg_dol_2018</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">avg_dol_2019</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">avg_dol_2020</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">baseline_control</td>
+      <td class="gt_row gt_right">1.87</td>
+      <td class="gt_row gt_right">2.46</td>
+      <td class="gt_row gt_right">3.73</td>
+      <td class="gt_row gt_right">33.00</td>
+      <td class="gt_row gt_right">43.54</td>
+      <td class="gt_row gt_right">67.08</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">film_control</td>
+      <td class="gt_row gt_right">1.95</td>
+      <td class="gt_row gt_right">3.00</td>
+      <td class="gt_row gt_right">3.18</td>
+      <td class="gt_row gt_right">31.94</td>
+      <td class="gt_row gt_right">48.13</td>
+      <td class="gt_row gt_right">51.98</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">program_test</td>
+      <td class="gt_row gt_right">2.68</td>
+      <td class="gt_row gt_right">3.50</td>
+      <td class="gt_row gt_right">5.00</td>
+      <td class="gt_row gt_right">43.58</td>
+      <td class="gt_row gt_right">56.16</td>
+      <td class="gt_row gt_right">81.98</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
+<div id="linear-model-for-yr-group" class="section level2">
+<h2>Linear model for yr + group</h2>
+<pre class="r"><code>lm_dat &lt;- dat %&gt;% 
+  mutate(period_year = as.character(period_year))
+
+lm.model &lt;- lm(data = lm_dat, 
+               formula = weekly_velocity_quantity ~ 0 + period_year*store_group)
+
+summary(lm.model)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = weekly_velocity_quantity ~ 0 + period_year * store_group, 
+##     data = lm_dat)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.5000 -1.3716 -0.4794  1.0000 11.2706 
+## 
+## Coefficients:
+##                                         Estimate Std. Error t value
+## period_year2018                          1.87156    0.13711  13.650
+## period_year2019                          2.46301    0.09890  24.905
+## period_year2020                          3.72940    0.10790  34.564
+## store_groupfilm_control                  0.08214    0.41301   0.199
+## store_groupprogram_test                  0.81265    0.48423   1.678
+## period_year2019:store_groupfilm_control  0.45485    0.50908   0.893
+## period_year2020:store_groupfilm_control -0.63541    0.52474  -1.211
+## period_year2019:store_groupprogram_test  0.22434    0.58086   0.386
+## period_year2020:store_groupprogram_test  0.45795    0.58246   0.786
+##                                                    Pr(&gt;|t|)    
+## period_year2018                         &lt;0.0000000000000002 ***
+## period_year2019                         &lt;0.0000000000000002 ***
+## period_year2020                         &lt;0.0000000000000002 ***
+## store_groupfilm_control                              0.8424    
+## store_groupprogram_test                              0.0936 .  
+## period_year2019:store_groupfilm_control              0.3718    
+## period_year2020:store_groupfilm_control              0.2262    
+## period_year2019:store_groupprogram_test              0.6994    
+## period_year2020:store_groupprogram_test              0.4319    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.024 on 1210 degrees of freedom
+## Multiple R-squared:  0.6891, Adjusted R-squared:  0.6868 
+## F-statistic:   298 on 9 and 1210 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<pre class="r"><code>summary(aov(lm.model))</code></pre>
+<pre><code>##                           Df Sum Sq Mean Sq F value               Pr(&gt;F)    
+## period_year                3  10846    3615  882.26 &lt; 0.0000000000000002 ***
+## store_group                2    116      58   14.16          0.000000831 ***
+## period_year:store_group    4     30       7    1.80                0.126    
+## Residuals               1210   4959       4                                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="trends-over-time" class="section level2">
+<h2>Trends over time</h2>
 <pre class="r"><code>dat &lt;-
   dat %&gt;% 
   mutate(period_yr_num = as.numeric(paste0(as.character(period_year), &quot;.&quot;, as.character(period_num))))</code></pre>
-</div>
-<div id="are-stores-represented-evenly-across-the-time-period" class="section level1">
-<h1>Are stores represented evenly across the time period?</h1>
+<div id="are-stores-represented-evenly-across-the-time-period" class="section level3">
+<h3>Are stores represented evenly across the time period?</h3>
 <pre class="r"><code>dat %&gt;% 
   count(store_id, store_group, period_year) %&gt;% 
   pivot_wider(names_from= period_year, values_from = n) %&gt;% 
   DT::datatable(rownames = F, filter = c(&quot;top&quot;))</code></pre>
-<div id="htmlwidget-8a0757fa0b53ea73b0f0" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8a0757fa0b53ea73b0f0">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"42\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"3\" data-max=\"9\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"5\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"11\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42],["baseline_control","baseline_control","baseline_control","baseline_control","program_test","baseline_control","baseline_control","baseline_control","film_control","baseline_control","program_test","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","film_control","program_test","baseline_control","program_test","baseline_control","film_control","baseline_control","baseline_control","film_control","baseline_control"],[8,8,7,7,6,7,8,7,7,8,7,7,5,3,7,3,6,8,6,7,6,7,8,9,7,6,6,8,4,8,7,8,7,null,7,6,8,7,null,7,6,null],[13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,8,13,13,13,13,10,13,13,13,13,11,13,13,13,13,13,5,13,13,13,13,13,13,13,null],[11,11,11,11,11,11,11,11,11,11,11,11,11,11,10,11,10,9,11,11,11,11,1,11,11,11,11,10,11,11,11,11,11,11,11,11,11,11,11,11,11,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>store_id<\/th>\n      <th>store_group<\/th>\n      <th>2018<\/th>\n      <th>2019<\/th>\n      <th>2020<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4a57afb353326399121b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4a57afb353326399121b">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"42\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"3\" data-max=\"9\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"5\" data-max=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"integer\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"11\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42],["baseline_control","baseline_control","baseline_control","baseline_control","program_test","baseline_control","baseline_control","baseline_control","film_control","baseline_control","program_test","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","baseline_control","film_control","program_test","baseline_control","program_test","baseline_control","film_control","baseline_control","baseline_control","film_control","baseline_control"],[8,8,7,7,6,7,8,7,7,8,7,7,5,3,7,3,6,8,6,7,6,7,8,9,7,6,6,8,4,8,7,8,7,null,7,6,8,7,null,7,6,null],[13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,8,13,13,13,13,10,13,13,13,13,11,13,13,13,13,13,5,13,13,13,13,13,13,13,null],[11,11,11,11,11,11,11,11,11,11,11,11,11,11,10,11,10,9,11,11,11,11,1,11,11,11,11,10,11,11,11,11,11,11,11,11,11,11,11,11,11,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>store_id<\/th>\n      <th>store_group<\/th>\n      <th>2018<\/th>\n      <th>2019<\/th>\n      <th>2020<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="investigatings-effect" class="section level1 tabset tabset-pills">
-<h1 class="tabset tabset-pills">Investigatings Effect</h1>
-<div id="is-there-an-overall-improvement" class="section level2">
-<h2>Is there an overall improvement?</h2>
+</div>
+<div id="average-sales-dollars-by-period" class="section level2">
+<h2>Average Sales Dollars by Period</h2>
+<p>2018… maybe just had some interest from the “innovation”<br />
+2019 is interesting, and would follow my bias the most with the film_control and program_test following similar trends at different magnitudes. 2020 is odd, where it seems to be having an entirely different pattern than expected, with average sale dollars spiking up for the second half of the year in the “program_test” condition.</p>
+<pre class="r"><code>dat %&gt;% 
+  mutate(date_us_week = as.Date(paste(period_year, period_num * 4, 1), format = &quot;%Y %U %u&quot;)) %&gt;% 
+  # mutate(period_year = as.factor(period_year)) %&gt;% 
+  group_by(date_us_week,period_year, store_group ) %&gt;% 
+  summarize(avg_amnt = mean(weekly_velocity_quantity),
+            avg_dol = mean(weekly_velocity_amount),
+            sd_dol = sd(weekly_velocity_amount)) %&gt;% 
+  ggplot(aes(date_us_week, avg_dol, color = store_group))+
+    geom_line(size = 1.2)+
+    geom_point(size = 1.5)+
+    geom_errorbar(aes(ymin = avg_dol - sd_dol, ymax = avg_dol + sd_dol), width = 9, position = &quot;dodge&quot;)+
+    labs(title = &quot;Avg Weekly Dollars For Store Group Over Time&quot;)+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    scale_x_date(date_breaks = &quot;1 months&quot;)+
+    looma_theme()+
+    facet_wrap(period_year ~ ., ncol =3, scales = &quot;free_x&quot;)+
+    theme(axis.text.x = element_text(angle = 60))+
+    NULL</code></pre>
+<p><img src="eda_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="is-there-a-potential-store-dependency" class="section level2">
 <h2>Is there a potential store dependency?</h2>
-<p>Can we know if that’s the case?</p>
+<p>Not sure if we can know if this is the case or not because we only see stores in one condition or the other.</p>
 </div>
 </div>
 

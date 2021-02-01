@@ -11,11 +11,17 @@ editor_options:
 ---
 
 # Goal
-To help show my process for:
+
+This section is meant to help show my general process around:
 
 * ingesting the dataset  
 * exploring the results  
 * developing the cleaned views  
+
+I am intentionally not spending a ton of time working to clean up the visuals or extensively documenting the results, but I have enable the "show code" functionality as part of the yaml header for this rmd file (eda.Rmd). 
+
+If desired the entirity of the website can be found on github [https://github.com/phildwalker/looma_audition]
+
 
 
 ```{r setup, include = F}
@@ -83,6 +89,8 @@ naniar::vis_miss(dat)
 
 ## Distributions of Data
 
+Using purrr to run through the distribution of each variable by store group (as we know that is the main indicator for this analysis).
+
 ```{r}
 
 reviewCol <- 
@@ -95,8 +103,27 @@ reviewCol <-
                # theme(plot.title = element_text(size = 15))
 )
 
-# reviewCol[[2]] #this is "iter 1"
-reviewCol
+# reviewCol
+
+reviewCol[[1]]
+reviewCol[[2]] + geom_bar(width = 0.0001, alpha = 0.4, color= "black")+ facet_wrap(store_group ~. , ncol =  1)
+
+# the store distribution seems similar for 2019 and 2020
+reviewCol[[2]] + geom_bar(width = 0.0001, alpha = 0.4, color= "black")+ facet_grid(store_group ~factor(period_year))
+
+reviewCol[[3]]
+reviewCol[[4]]
+reviewCol[[4]] + facet_wrap(factor(period_year) ~ ., ncol = 3)
+
+reviewCol[[5]]
+
+# no zero sales... which makes sense, but it means the data is naturally censored
+reviewCol[[6]] + geom_bar(width = 4)
+
+reviewCol[[6]] + geom_bar(width = 4)+ facet_wrap(factor(period_year) ~ ., ncol = 3)
+
+reviewCol[[7]]
+
 
 ```
 
@@ -225,8 +252,69 @@ p_value
 ```
 
 
+# Investigatings Effect {.tabset .tabset-pills}
 
-# Trends over time {.tabset .tabset-pills}
+## By Group and by Year 
+
+Visually it looks like across conditions, that the sales are increasing YOY.
+
+
+
+```{r}
+summary <- dat %>% 
+  mutate(period_year = as.factor(period_year)) %>% 
+  group_by(store_group, period_year) %>% 
+  summarise(avg_amnt = mean(weekly_velocity_quantity),
+            n = n(),
+            std_amnt = sd(weekly_velocity_quantity))
+
+dat %>% 
+  mutate(period_year = as.factor(period_year)) %>% 
+  ggplot(aes(period_year, weekly_velocity_quantity, fill = period_year, color = period_year))+
+    geom_jitter(size = 0.5, width = .3)+
+    geom_violin(alpha=0.7)+
+    geom_point(data = summary, aes(period_year, avg_amnt), color= "black", size = 2.5)+
+    labs(title = "Comparison of Weekly Velocity Quantity by Store Group")+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    looma_theme()+
+    facet_wrap(store_group ~ ., ncol =3)
+
+```
+
+It's interesting that the film control group doesn't seem to see the same YOY increase for 2019 -> 2020 as the other two conditions.
+
+```{r}
+dat %>% 
+  mutate(period_year = as.factor(period_year)) %>% 
+  group_by(store_group, period_year) %>% 
+  summarise(avg_amnt = mean(weekly_velocity_quantity),
+            avg_dol = mean(weekly_velocity_amount)) %>%
+  ungroup() %>% 
+  pivot_wider(names_from = "period_year", values_from = c("avg_amnt", "avg_dol")) %>% 
+  gt() %>% 
+  fmt_number(columns = 2:7, decimals = 2)
+```
+
+
+## Linear model for yr + group
+
+```{r}
+lm_dat <- dat %>% 
+  mutate(period_year = as.character(period_year))
+
+lm.model <- lm(data = lm_dat, 
+               formula = weekly_velocity_quantity ~ 0 + period_year*store_group)
+
+summary(lm.model)
+
+summary(aov(lm.model))
+
+```
+
+
+
+## Trends over time
 
 ```{r}
 dat <-
@@ -235,7 +323,7 @@ dat <-
 ```
 
 
-# Are stores represented evenly across the time period?
+### Are stores represented evenly across the time period?
 
 ```{r}
 
@@ -249,15 +337,45 @@ dat %>%
 
 
 
-# Investigatings Effect {.tabset .tabset-pills}
 
 
-## Is there an overall improvement?
+
+## Average Sales Dollars by Period
+
+2018... maybe just had some interest from the "innovation"  
+2019 is interesting, and would follow my bias the most with the film_control and program_test following similar trends at different magnitudes.
+2020 is odd, where it seems to be having an entirely different pattern than expected, with average sale dollars spiking up for the second half of the year in the "program_test" condition. 
+
+
+```{r}
+dat %>% 
+  mutate(date_us_week = as.Date(paste(period_year, period_num * 4, 1), format = "%Y %U %u")) %>% 
+  # mutate(period_year = as.factor(period_year)) %>% 
+  group_by(date_us_week,period_year, store_group ) %>% 
+  summarize(avg_amnt = mean(weekly_velocity_quantity),
+            avg_dol = mean(weekly_velocity_amount),
+            sd_dol = sd(weekly_velocity_amount)) %>% 
+  ggplot(aes(date_us_week, avg_dol, color = store_group))+
+    geom_line(size = 1.2)+
+    geom_point(size = 1.5)+
+    geom_errorbar(aes(ymin = avg_dol - sd_dol, ymax = avg_dol + sd_dol), width = 9, position = "dodge")+
+    labs(title = "Avg Weekly Dollars For Store Group Over Time")+
+    scale_fill_pdw()+
+    scale_color_pdw()+
+    scale_x_date(date_breaks = "1 months")+
+    looma_theme()+
+    facet_wrap(period_year ~ ., ncol =3, scales = "free_x")+
+    theme(axis.text.x = element_text(angle = 60))+
+    NULL
+
+
+```
+
 
 
 ## Is there a potential store dependency?
-Can we know if that's the case?
 
+Not sure if we can know if this is the case or not because we only see stores in one condition or the other.
 
 
 

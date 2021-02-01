@@ -47,7 +47,8 @@ Assume you need to provide an analysis of this experiment under time constraints
 
 ## Goal  
 
-__Goal:__
+__Goal:__  
+
 We want to know the impact the Loop™ campaign had on sales. By comparing the different groups we would like to learn a few different things:  
 
 * Does the Loop campaign affect store sales (Program Test & Film Control vs Baseline)  
@@ -69,14 +70,21 @@ Potential Investigation Next Steps:
 
 * It would be interesting in future iterations, to get a more detailed view of what is being purchased. This could potentially help to understand where the campaign leads to the purchase of (perceived) similar products. 
 * Depending on who the customer is, we might want to calculate the ROI of the Loop™ campaign 
+* It would be interesting figure out the "0's" (ie getting total people who when to the store but didn't buy)
  
 ## Results
 
-__Results:__
+__Results:__  
 From the analysis we find that:
 
+1. Overall the Loop™ campaign looks to had a positive impact on Brewery A's sales.  
+1. The sales increased year over year for all groups.  
+    * This could mean that the brand awareness for the Brewery has generally increased over time.
+    * Could be a Covid affect (more people trying beer)
 1. The program test both show an increase in the mean sales (both amount and dollars) as compared to the baseline and the film control.  
     * For this sample, it looks like it __increases sales of ~$15__ (just over 1 additional unit) on average as compared to the baseline  
+
+
 
 
 </div>
@@ -122,9 +130,10 @@ dat %>%
     geom_jitter(size = 0.5, width = .3)+
     geom_violin(alpha=0.7)+
     geom_point(data = summary, aes(store_group, avg_amnt), color= "black", size = 2.5)+
-    labs(title = "Comparison of Weekly Velocity Amount ($ Sales) by Store Group",
-         subtitle = "Points represent average weekly sales per promo period.",
-         x= NULL, y= "Weekly Sales")+
+    labs(title = "Comparison of Weekly Velocity Amount ($ Sales) by Store Group (Condition)",
+         subtitle = "Points represent average weekly sales per promo period",
+         caption = "Black point represent the groups average ",
+         x= NULL, y= "Average Weekly Sales")+
     scale_y_continuous(labels = scales::dollar)+
     scale_fill_pdw()+
     scale_color_pdw()+
@@ -248,3 +257,8 @@ summary %>%
 
 
 
+
+
+# Controlling by Year 
+
+## Differences by condition
